@@ -1,0 +1,187 @@
+@charset "utf-8";
+
+.list {
+    width: 960px;
+    margin: auto;
+}
+
+.list dt {
+    font-size: 20px;
+}
+
+[lang='zh-Hant'] .list dt span {
+    color: #17966c;
+    padding-left: 10px;
+}
+
+[lang='zh-Hans'] .list dt span {
+    font-size: 14px;
+    padding-left: 10px;
+}
+
+.list dd {
+    overflow: hidden;
+    padding: 20px 0;
+    border-bottom: 1px solid #e6e6e6;
+    zoom: 1;
+    position: relative;
+}
+
+.list dd a img {
+    float: left;
+    margin-right: 30px;
+    width: 120px;
+    height: 150px;
+}
+
+.list .state {
+    position: absolute;
+    top: 20px;
+    left: 80px;
+    width: 40px;
+    height: 40px;
+    background: url(/images/hetu.png) no-repeat -24px -4px;
+}
+
+.list .continue {
+    background-position: -64px -4px;
+}
+
+.list dd h4 {
+    font-size: 22px;
+    font-weight: normal;
+}
+
+.list h4 span {
+    font-size: 14px;
+    color: #888;
+    padding-left: 10px;
+}
+
+.list dd .intro {
+    overflow: hidden;
+    margin: 15px 0;
+    height: 4.5em;
+    line-height: 1.5em;
+}
+
+.list dd .button {
+    border: 1px solid #1bb582;
+    padding: 3px 10px;
+    display: inline-block;
+    margin-right: 10px;
+    float: right;
+    border-radius: 4px;
+    color: #1bb582;
+    cursor: pointer;
+}
+
+.list dd .button:hover {
+    background: #1bb582;
+    color: #fff;
+}
+
+.page {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.page a,
+.page span,
+.page input,
+.page button {
+    height: 37px;
+    width: 37px;
+    line-height: 37px;
+    background: url(/images/hetu.png) -24px -44px;
+    vertical-align: middle;
+    margin: 0 5px;
+    color: #7f7f7f;
+    font-size: 14px;
+    font-family: Verdana;
+}
+
+.page a,
+.page span {
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    font-weight: bold;
+}
+
+.page a:visited {
+    color: #7f7f7f;
+}
+
+.page button:hover,
+.page a:hover {
+    background-position: -24px -81px;
+    color: #7f7f7f;
+}
+
+.page a:active {
+    background-position: -24px -118px;
+}
+
+.page span.current {
+    background-position: -61px -44px;
+    color: #fff;
+}
+
+.page b {
+    display: inline-block;
+    margin: 0 5px;
+    font-size: 14px;
+    color: #7f7f7f;
+}
+
+.next b,
+.pre b {
+    cursor: pointer;
+    width: 0;
+    height: 0;
+    border-width: 6px;
+    border-style: solid;
+    font-size: 0;
+    line-height: 0;
+}
+
+.next b {
+    border-color: #f8f8f8 #f8f8f8 #f8f8f8 #4e4e4e;
+    margin: 12px 0 0 7px;
+}
+
+.pre b {
+    border-color: #f8f8f8 #4e4e4e #f8f8f8 #f8f8f8;
+    margin: 12px 0 0 -7px;
+}
+
+.page div,
+.page form {
+    display: inline;
+    padding: 0;
+    text-indent: 0;
+    padding-left: 8px;
+}
+
+.page input {
+    border: 0;
+    text-indent: 5px;
+    background-position: -61px -81px;
+}
+
+.page button {
+    border: 0;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    display: none;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}

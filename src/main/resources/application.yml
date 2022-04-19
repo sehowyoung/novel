@@ -1,0 +1,42 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/novel
+    username: root
+    password: howyoung
+  thymeleaf:
+    prefix: classpath:/templates/
+  # 后缀
+    suffix: .html
+  # 模板格式
+    mode: HTML5
+    encoding: UTF-8
+  devtools:
+    restart:
+      enabled: true
+      additional-paths: src/main/java/
+      exclude: test/**
+
+mybatis:
+  type-aliases-package: csu.gra.novel.domain
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:mybatis/*Mapper.xml
+
+logging:
+  level:
+    csu.gra.novel.persistence: debug
+
+website:
+  name: 畅读阁
+#  domain: xiongxyang.gitee.io
+  #SEO关键词
+  keyword: ${website.name},小说,文学系统,开源小说系统,免费小说建站程序
+  #SEO描述
+  description: ${website.name}是一个多端（PC、WAP）阅读、功能完善的文学系统
+  #联系QQ
+  qq: 1030137871

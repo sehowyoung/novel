@@ -10,8 +10,10 @@ import java.util.Map;
  */
 public interface BookService {
     /**
-     * 查询首页小说设置列表数据
-     * @return
+     * 查询推荐小说
+     * @return List
      */
-    Map<Byte, List<Book>> listBooks();
+    List<Book> getRecommendBooks(int num);
+
+    List<Book> getBooksByCategory(String category, int num);
 }

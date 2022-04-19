@@ -3,7 +3,16 @@
 
 <mapper namespace="csu.gra.novel.mapper.BookMapper">
     <select id="selectCurrentBook" resultType="Book">
-        SELECT * FROM book
+        SELECT id as bookId, name, description, author, category, updated, cover, hot, status, word
+        FROM book
         limit 0, #{num}
+    </select>
+    <select id="selectBooksByCategory" resultType="Book">
+        SELECT id as bookId, name, description, author, category, updated, cover, hot, status, word
+        FROM book
+        WHERE category = #{category}
+        <if test="num != 0">
+            limit 0, #{num}
+        </if>
     </select>
 </mapper>

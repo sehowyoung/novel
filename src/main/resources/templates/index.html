@@ -1,419 +1,464 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE HTML>
+<html lang="zh-Hans" xmlns="http://www.thymeleaf.org">
 
-<head th:replace="common/header :: common_head(~{::title},~{::meta},~{::link},~{})">
-    <title th:text="${application.website.name}+'_小说网站'"></title>
-    <meta name="keywords" th:content="${application.website.keyword}"/>
-    <meta name="description"
-          th:content="${application.website.description}"/>
-    <link href="favicon.ico" type="image/x-icon" rel="shortcut icon"/>
-    <link href="favicon.ico" type="image/x-icon" rel="Bookmark"/>
-    <link rel="stylesheet" href="/css/main.css"/>
-</head>
-<body>
-
-
-<div th:replace="common/top :: top('0')">
-</div>
-
-<div class="main box_center cf">
-    <div class="channelWrap channelBanner cf">
-        <div class="leftBox">
-            <div class="sliderContent">
-                <dl class="scBigImg" id="carouseBig" th:if="${bookMap['0']}" >
-                    <dd th:each="book,iterStat : ${bookMap['0']}" th:class="${iterStat.first}? 'on'"><a th:href="'/book/'+${book.bookId}+'.html'">
-                        <img th:src="${book.picUrl}" th:alt="${book.bookName}"/></a></dd>
-                </dl>
-                <div class="scSmallImg" id="carouseSmall" >
-                    <ul th:if="${bookMap['0']}">
-                        <li th:each="book,iterStat : ${bookMap['0']}" th:class="${iterStat.first}? 'on'">
-                        <img th:src="${book.picUrl}" th:alt="${book.bookName}"/></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="hot_articles">
-                <dl class="hot_recommend" id="topBooks1" th:if="${bookMap['1']} and ${#lists.size(bookMap['1']) > 0}">
-                    <dt><a th:href="'/book/'+${bookMap['1'][0].bookId}+'.html'" th:text="${bookMap['1'][0].bookName}"></a></dt>
-                    <dd th:if="${#lists.size(bookMap['1']) > 1}"><a th:href="'/book/'+${bookMap['1'][1].bookId}+'.html'" th:text="${bookMap['1'][1].bookName}"></a><a th:if="${#lists.size(bookMap['1']) > 2}" th:href="'/book/'+${bookMap['1'][1].bookId}+'.html'" th:text="${bookMap['1'][1].bookName}"></a></dd>
-                    <dd th:if="${#lists.size(bookMap['1']) > 3}"><a th:href="'/book/'+${bookMap['1'][3].bookId}+'.html'" th:text="${bookMap['1'][3].bookName}"></a><a th:if="${#lists.size(bookMap['1']) > 4}" th:href="'/book/'+${bookMap['1'][4].bookId}+'.html'" th:text="${bookMap['1'][4].bookName}"></a></dd>
-                </dl>
-                <dl class="hot_recommend" id="topBooks2" th:if="${bookMap['1']} and ${#lists.size(bookMap['1']) > 5}">
-                    <dt><a th:href="'/book/'+${bookMap['1'][5].bookId}+'.html'" th:text="${bookMap['1'][5].bookName}"></a></dt>
-                    <dd th:if="${#lists.size(bookMap['1']) > 6}"><a th:href="'/book/'+${bookMap['1'][6].bookId}+'.html'" th:text="${bookMap['1'][6].bookName}"></a><a th:if="${#lists.size(bookMap['1']) > 7}" th:href="'/book/'+${bookMap['1'][7].bookId}+'.html'" th:text="${bookMap['1'][7].bookName}"></a></dd>
-                    <dd th:if="${#lists.size(bookMap['1']) > 8}"><a th:href="'/book/'+${bookMap['1'][8].bookId}+'.html'" th:text="${bookMap['1'][8].bookName}"></a><a th:if="${#lists.size(bookMap['1']) > 9}" th:href="'/book/'+${bookMap['1'][9].bookId}+'.html'" th:text="${bookMap['1'][9].bookName}"></a></dd>
-                </dl>
-
-                <dl class="hot_notice" id="indexNews">
-                    <dd style="text-align:left;" th:each="news : ${newsList}"><span th:text="'['+${news.catName}+']'"></span><a th:href="'/about/newsInfo-'+${news.id}+'.html'" th:utext="${news.title}"></a>
-                    </dd>
-
-                </dl>
-            </div>
-        </div>
-        <div class="rightBox">
-            <div class="title cf" id="weekcommend">
-                <h3>本周强推</h3>
-            </div>
-            <div class="rightList">
-                <ul id="currentWeek" th:if="${bookMap['2']}">
-                    <li th:each="book,iterStat : ${bookMap['2']}"  th:class="${iterStat.first}? 'on num1': (${iterStat.index < 3}? 'num'+${iterStat.index+1})">
-                        <div class="book_name"><i th:text="${iterStat.index+1}"></i><a class="name" th:href="'/book/'+${book.bookId}+'.html'" th:text="${book.bookName}"></a></div>
-                        <div class="book_intro">
-                            <div class="cover"><a th:href="'/book/'+${book.bookId}+'.html'"><img th:src="${book.picUrl}" th:alt="${book.bookName}"></a>
-                            </div>
-                            <a class="txt" th:href="'/book/'+${book.bookId}+'.html'" th:utext="${book.bookDesc}"></a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="channelWrap channelPic cf">
-        <div class="leftBox">
-            <div class="title">
-                <h2 class="on">热门推荐</h2>
-            </div>
-            <div class="picRecommend cf" id="hotRecBooks" th:if="${bookMap['3']}">
-                <div class="itemsList" th:each="book : ${bookMap['3']}">
-                    <a class="items_img" th:href="'/book/'+${book.bookId}+'.html'">
-                        <img class="lazyload" src="/images/default.gif" th:data-src="${book.picUrl}" th:alt="${book.bookName}">
-                    </a>
-                    <div class="items_txt">
-                        <h4><a th:href="'/book/'+${book.bookId}+'.html'" th:text="${book.bookName}"></a></h4>
-                        <p class="author"><a href="javascript:void(0)" th:text="'作者：'+${book.authorName}"></a></p>
-                        <p class="intro"><a th:href="'/book/'+${book.bookId}+'.html'" th:utext="${book.bookDesc}"></a>
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <div id="bookrank1_ShowBookRank">
-            <div class="rightBox ">
-                <div class="title cf">
-                    <h3 class="on">点击榜单</h3>
-                </div>
-                <div class="rightList">
-                    <ul id="clickRankBooks">
-
-
-                    </ul>
-                    <div class="more"><a href="/book/book_ranking.html">查看更多&gt;</a></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="channelWrap channelPic cf">
-        <div class="leftBox">
-            <div class="title">
-                <h2>精品推荐</h2>
-            </div>
-            <div class="picRecommend cf" id="classicBooks" th:if="${bookMap['4']}">
-                <div class="itemsList" th:each="book : ${bookMap['4']}">
-                    <a class="items_img" th:href="'/book/'+${book.bookId}+'.html'">
-                        <img class="lazyload" src="/images/default.gif" th:data-src="${book.picUrl}" th:alt="${book.bookName}">
-                    </a>
-                    <div class="items_txt">
-                        <h4><a th:href="'/book/'+${book.bookId}+'.html'" th:text="${book.bookName}"></a></h4>
-                        <p class="author"><a href="javascript:void(0)" th:text="'作者：'+${book.authorName}"></a></p>
-                        <p class="intro"><a th:href="'/book/'+${book.bookId}+'.html'" th:utext="${book.bookDesc}"></a>
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <div id="bookrank2_ShowBookRank">
-            <div class="rightBox ">
-                <div class="title cf">
-                    <h3 class="on">新书榜单</h3>
-                </div>
-                <div class="rightList">
-                    <ul id="newRankBooks">
-
-
-                    </ul>
-                    <div class="more"><a href="/book/book_ranking.html?type=1">查看更多&gt;</a></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="channelWrap channelTable cf">
-        <div class="leftBox">
-            <div class="title">
-                <h2>最新更新</h2>
-            </div>
-            <div class="updateTable">
-                <table cellpadding="0" cellspacing="0">
-                    <thead>
-                    <tr>
-                        <th class="style">类别</th>
-                        <th class="name">书名</th>
-                        <th class="chapter">最新章节</th>
-                        <th class="author">作者</th>
-                        <th class="time">更新时间</th>
-                    </tr>
-                    </thead>
-                    <tbody id="newRankBooks2">
-
-
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div id="bookrank5_ShowBookRank">
-            <div class="rightBox mb20">
-                <div class="title cf">
-                    <h3 class="on">更新榜单</h3>
-                </div>
-                <div class="rightList">
-                    <ul id="updateRankBooks">
-
-
-                    </ul>
-                    <div class="more"><a href="/book/book_ranking.html?type=2">查看更多&gt;</a></div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
-<div class="friend_link">
-    <div class="box_center cf" id="friendLink">
-        <span>友情链接：</span>
-    </div>
-</div>
-
-<div th:replace="common/footer :: footer">
-</div>
-
-
-</body>
-<div th:replace="common/js :: js"></div>
-<script src="/javascript/lazyload.js" type="text/javascript"></script>
-<script language="javascript" type="text/javascript">
-    var $div = $('.scBigImg dl');//放置大图容器
-    var $nav = $('.scSmallImg li');//放置缩略图容器
-    var num = -1;
-    var open;
-
-    function changeKv() {
-        if (num >= $nav.length - 1) {
-            num = 0;
-        } else {
-            num++;
-        }
-        $nav.eq(num).trigger('mouseenter');
-        open = setTimeout(changeKv, 3000);
+<head>
+  <meta charset="utf-8" />
+  <meta name="Copyright" content="畅读阁" />
+  <meta name="keywords" content="免费阅读,在线阅读,免费小说,电子书,书籍,小说" />
+  <meta name="description" content="畅读阁是一个提供各种热门电子书,书籍,小说免费在线阅读的网站，我们致力于为在线阅读提供良好的阅读体验" />
+  <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+  <link rel="alternate" hreflang="zh-Hant" href="index.html" />
+  <link rel="alternate" media="only screen and (max-width: 640px)" href="index.html" />
+  <link type="text/css" rel="stylesheet" href="/css/changdu.css" />
+<!--  <script type="text/javascript" src="/command/hetu.js"></script>-->
+  <style type="text/css">
+    .body dl {
+      overflow: hidden;
     }
 
-    changeKv();
-    $nav.each(function (index) {
-        $(this).off('mouseenter').on('mouseenter', function () {
-            clearTimeout(open);
+    .recommand dt {
+      font-size: 30px;
+      color: #189e71;
+      border-bottom: 2px solid #e6e6e6;
+      margin-bottom: 10px;
+      height: 40px;
+    }
 
-            $(this).addClass('on').siblings().removeClass('on');
-            $('.scBigImg dd').eq(index).addClass('on').siblings().removeClass('on');
-            $('.scSmallImg').off('mouseleave').on('mouseleave', function () {
-                num = index;
-                setTimeout(function () {
-                    changeKv();
-                }, 3000)
-            })
-        });
-    });
-    $div.each(function () {
-        $(this).off('mouseenter').on('mouseenter', function () {
-            clearTimeout(open);
-        });
-    });
+    .recommand dt span {
+      padding: 0 20px;
+      border-bottom: 2px solid #189e71;
+      border-right: 2px solid #fff;
+      height: 40px;
+      line-height: 40px;
+      display: inline-block;
+    }
 
-    lazyload();
-    $(function () {
+    .recommand li {
+      float: left;
+      padding: 5px 10px 20px 10px;
+      width: 300px;
+      overflow: hidden;
+      display: inline;
+    }
 
-        //点击榜单数据查询
-        $.ajax({
-            type: "get",
-            url: "/book/listClickRank",
-            data: {},
-            dataType: "json",
-            success: function (data) {
-                if (data.code == 200) {
-                    var clickRankBooks = data.data;
-                    var clickRankBooksHtml = "";
-                    for (var i = 0; i < clickRankBooks.length; i++) {
-                        var clickRankBook = clickRankBooks[i];
-                        var classHtml = "";
-                        var imageHtml = "";
-                        if (i == 0) {
-                            classHtml = "on";
-                            imageHtml = "<img src=\"" + clickRankBook.picUrl + "\" alt=\"" + clickRankBook.bookName + "\"/>";
-                        }
-                        if (i < 3) {
-                            classHtml += (" num" + (i + 1));
-                        }
-                        clickRankBooksHtml += ("<li class=\"" + classHtml + "\">\n" +
-                            "                            <div class=\"book_name\">\n" +
-                            "                                <i>" + (i + 1) + "</i><a class=\"name\" href=\"/book/" + clickRankBook.id + ".html\">" + clickRankBook.bookName + "</a>\n" +
-                            "                            </div>\n" +
-                            "                            <div class=\"book_intro\">\n" +
-                            "                                <div class=\"cover\">\n" +
-                            "                                    <a href=\"book/" + clickRankBook.id + ".html\">"+ imageHtml +"</a>\n" +
-                            "                                </div>\n" +
-                            "                                <a class=\"txt\" href=\"/book/" + clickRankBook.id + ".html\">" + clickRankBook.bookDesc + "</a>\n" +
-                            "                            </div>\n" +
-                            "\n" +
-                            "                        </li>");
-                    }
-                    $("#clickRankBooks").html(clickRankBooksHtml);
-                } else {
-                    layer.alert(data.msg);
-                }
+    .recommand li img {
+      float: left;
+      border: 0;
+      margin-left: 10px;
+      width: 120px;
+      height: 150px;
+    }
 
-            },
-            error: function () {
-                layer.alert('网络异常');
-            }
-        })
-        //新书榜单查询
-        $.ajax({
-            type: "get",
-            url: "/book/listNewRank",
-            data: {},
-            dataType: "json",
-            success: function (data) {
-                if (data.code == 200) {
-                    var newRankBooks = data.data;
-                    var newRankBooksHtml = "";
-                    for (var i = 0; i < newRankBooks.length; i++) {
-                        var newRankBook = newRankBooks[i];
-                        var classHtml = "";
-                        var imageHtml = "";
-                        if (i == 0) {
-                            classHtml = "on";
-                            imageHtml = "<img src=\"" + newRankBook.picUrl + "\" alt=\"" + newRankBook.bookName + "\"/>";
-                        }
-                        if (i < 3) {
-                            classHtml += (" num" + (i + 1));
-                        }
-                        newRankBooksHtml += ("<li class=\"" + classHtml + "\">\n" +
-                            "                            <div class=\"book_name\">\n" +
-                            "                                <i>" + (i + 1) + "</i><a class=\"name\" href=\"/book/" + newRankBook.id + ".html\">" + newRankBook.bookName + "</a>\n" +
-                            "                            </div>\n" +
-                            "                            <div class=\"book_intro\">\n" +
-                            "                                <div class=\"cover\">\n" +
-                            "                                    <a href=\"book/" + newRankBook.id + ".html\">" + imageHtml + "</a>\n" +
-                            "                                </div>\n" +
-                            "                                <a class=\"txt\" href=\"/book/" + newRankBook.id + ".html\">" + newRankBook.bookDesc + "</a>\n" +
-                            "                            </div>\n" +
-                            "\n" +
-                            "                        </li>");
-                    }
-                    $("#newRankBooks").html(newRankBooksHtml);
-                } else {
-                    layer.alert(data.msg);
-                }
+    .recommand li div {
+      overflow: hidden;
+    }
 
-            },
-            error: function () {
-                layer.alert('网络异常');
-            }
-        })
-        //更新榜单查询
-        $.ajax({
-            type: "get",
-            url: "/book/listUpdateRank",
-            data: {},
-            dataType: "json",
-            success: function (data) {
-                if (data.code == 200) {
-                    var updateRankBooks = data.data;
-                    var updateRankBookHtml = "";
-                    var updateRankBookHtml2 = "";
-                    for (var i = 0; i < updateRankBooks.length; i++) {
-                        var updateRankBook = updateRankBooks[i];
-                        var classHtml = "";
-                        var imageHtml = "";
-                        if (i == 0) {
-                            classHtml = "on";
-                            imageHtml = "<img\ src=\"" + updateRankBook.picUrl + "\" alt=\"" + updateRankBook.bookName + "\"/>";
-                        }
-                        if (i < 3) {
-                            classHtml += (" num" + (i + 1));
-                        }
-                        if (i < 10) {
-                            updateRankBookHtml += ("<li class=\"" + classHtml + "\">\n" +
-                                "                            <div class=\"book_name\">\n" +
-                                "                                <i>" + (i + 1) + "</i><a class=\"name\" href=\"/book/" + updateRankBook.id + ".html\">" + updateRankBook.bookName + "</a>\n" +
-                                "                            </div>\n" +
-                                "                            <div class=\"book_intro\">\n" +
-                                "                                <div class=\"cover\">\n" +
-                                "                                    <a href=\"book/" + updateRankBook.id + ".html\">" + imageHtml + "</a>\n" +
-                                "                                </div>\n" +
-                                "                                <a class=\"txt\" href=\"/book/" + updateRankBook.id + ".html\">" + updateRankBook.bookDesc + "</a>\n" +
-                                "                            </div>\n" +
-                                "\n" +
-                                "                        </li>");
-                        }
-                        updateRankBookHtml2 += ("<tr>\n" +
-                            "                        <td class=\"style\"><a href=\"book/bookclass.html?c=" + updateRankBook.catId + "\">[" + updateRankBook.catName + "]</a></td>\n" +
-                            "                        <td class=\"name\"><a href=\"/book/" + updateRankBook.id + ".html\">" + updateRankBook.bookName + "</a></td>\n" +
-                            "                        <td class=\"chapter\"><a href=\"/book/" + updateRankBook.id + ".html\">" + updateRankBook.lastIndexName + "</a>\n" +
-                            "                            <i class=\"\"></i>\n" +
-                            "                        </td>\n" +
-                            "                        <td class=\"author\"><a href=\"javascript:void(0)\">" + updateRankBook.authorName + "</a></td>\n" +
-                            "                        <td class=\"time\">" + updateRankBook.lastIndexUpdateTime + "</td>\n" +
-                            "                    </tr>");
-                    }
-                    $("#updateRankBooks").html(updateRankBookHtml);
-                    $("#newRankBooks2").html(updateRankBookHtml2);
-                } else {
-                    layer.alert(data.msg);
-                }
+    .recommand li .title {
+      padding: 0 0 0 20px;
+      zoom: 1;
+    }
 
-            }
-            ,
-            error: function () {
-                layer.alert('网络异常');
-            }
-        })
-        //友情链接查询
-        $.ajax({
-            type: "get",
-            url: "/friendLink/listIndexLink",
-            data: {},
-            dataType: "json",
-            success: function (data) {
-                if (data.code == 200) {
-                    var friendLinkList = data.data;
-                    var friendLinkHtml = "";
-                    for (var i = 0; i < friendLinkList.length; i++) {
-                        var friendLink = friendLinkList[i];
-                        friendLinkHtml += ("<a target='_blank' href=\"" + friendLink.linkUrl + "\">" + friendLink.linkName + "</a>");
-                    }
-                    $("#friendLink").append(friendLinkHtml);
-                } else {
-                    layer.alert(data.msg);
-                }
+    .recommand li h3 {
+      display: inline-block;
+      width: 80px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
 
-            },
-            error: function () {
-                layer.alert('网络异常');
-            }
-        })
-        $("#weekcommend h3").mouseover(function () {
-            $("#weekcommend h3").removeClass("on");
-            $(this).addClass("on");
-            if ($(this).attr("class").indexOf("fr") >= 0) {
-                $("#currentWeek").hide();
-                $("#currentPreWeek").show();
-            } else {
-                $("#currentPreWeek").hide();
-                $("#currentWeek").show();
-            }
-        });
-    });
-</script>
+    .recommand li .title .author {
+      color: #bbb;
+      float: right;
+      zoom: 1;
+      width: 58px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      text-align: right;
+      display: inline;
+    }
+
+    .recommand li .intro {
+      padding: 15px 10px 20px 20px;
+      height: 90px;
+      line-height: 1.6;
+    }
+
+    .catalog {
+      width: 300px;
+      float: left;
+      margin: 10px;
+      display: inline;
+    }
+
+    .catalog dt {
+      font-size: 16px;
+      border-top: 1px solid #189e71;
+      border-bottom: 1px dashed #e6e6e6;
+      padding: 5px 0;
+    }
+
+    .catalog dt a {
+      margin: 5px 15px;
+      border-left: 3px solid #189e71;
+      padding: 1px 10px;
+      color: #189e71;
+    }
+
+    .catalog dd {
+      overflow: hidden;
+    }
+
+    .catalog .top {
+      padding: 10px 10px 10px;
+    }
+
+    .catalog .top img {
+      float: left;
+      width: 67px;
+      height: 82px;
+      margin-right: 10px;
+      border: 0;
+    }
+
+    .catalog .top h3 {
+      overflow: hidden;
+      white-space: nowrap;
+      line-height: 20px;
+    }
+
+    .catalog .top .intro {
+      line-height: 1.4;
+      overflow: hidden;
+      padding-top: 4px;
+      height: 58px;
+    }
+
+    .catalog .list {
+      overflow: hidden;
+      min-height: 150px;
+    }
+
+    .catalog li {
+      float: left;
+      width: 130px;
+      margin: 3px 10px;
+      overflow: hidden;
+      white-space: nowrap;
+      display: inline;
+    }
+
+    .catalog li span {
+      color: #bbb;
+    }
+
+    .new {
+      font-size: 15px;
+    }
+
+    .new li {
+      padding: 10px 20px;
+      border-bottom: 1px solid #e6e6e6;
+      position: relative;
+    }
+
+    .new li.nhead {
+      text-align: center;
+      background: url(images/line.gif) repeat-x center;
+      border: 0;
+      padding: 0;
+      margin: 20px 0 10px;
+    }
+
+    .new li.nhead span {
+      background: #fff;
+      font-size: 24px;
+      color: #189e71;
+      border-right: 2px solid #189e71;
+      border-left: 2px solid #189e71;
+      padding: 0 10px;
+    }
+
+    .new li .author {
+      position: absolute;
+      right: 0;
+    }
+
+    .new li .author a {
+      color: #bbb;
+    }
+
+    .new li .bname {
+      display: inline-block;
+      width: 460px;
+      margin-left: 5px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      vertical-align: bottom;
+    }
+
+    .link {
+      padding: 20px;
+    }
+
+    .link a {
+      margin: 0 5px;
+    }
+  </style>
+  <title>畅读阁</title>
+</head>
+
+<body>
+<div class="head">
+  <span id="title">畅读阁</span>
+  <form id="form1" method="get" action="/book/search" target="_blank">
+    <div id="search_box">
+      <input type="text" id="keyword" name="keyword" placeholder="请输入搜索内容..." />
+      <button id="search_b" type="submit">搜索</button>
+    </div>
+  </form>
+</div>
+<div class="menu">
+  <a href="/index">首页</a>
+  <a href="/book/index.php">小说</a>
+  <a href="/top/index.php">榜单</a>
+  <a href="/favorite/index.php">书架</a>
+<!--  <a id="m" href="https://m.hetushu.com/index.php">手机阅读</a>-->
+</div>
+<div class="body" id="body">
+  <dl class="recommand">
+    <dt><span>推荐小说</span></dt>
+    <dd>
+      <ul >
+        <li th:each="book : ${recommends}">
+          <a th:href="'/book/'+${book.bookId} + '/index'" th:title="${book.name}">
+            <img th:src="${book.cover}" th:alt="${book.name}">
+          </a>
+          <div class="title">
+            <a href="" class="author" th:title="${book.author} + '作品集'" th:text="${book.author}"></a>
+            <h3><a th:href="'/book/' + ${book.bookId} + '/index'" th:title="${book.name}" th:text="${book.name}"></a></h3>
+          </div>
+          <div class="intro" th:text="${book.description}"></div>
+        </li>
+      </ul>
+    </dd>
+  </dl>
+  <div id="hetu97"></div>
+  <dl class="cbox">
+    <dd class="catalog">
+      <dl>
+        <dt><a href="/book/index?type=%E7%8E%84%E5%B9%BB%E5%B0%8F%E8%AF%B4">玄幻小说</a></dt>
+        <dd class="top">
+          <a th:href="'/book/' + ${fantasies[0].bookId} + '/index.html'" th:title="${fantasies[0].name}">
+            <img th:src="${fantasies[0].cover}" th:lt="${fantasies[0].name}" /></a>
+          <div>
+            <h3><a th:href="'/book/' + ${fantasies[0].bookId} + '/index.html'" th:title="${fantasies[0].name}" th:text="${fantasies[0].name}"></a></h3>
+            <div class="intro" th:text="${fantasies[0].description}"></div>
+          </div>
+        </dd>
+        <dd>
+          <ul class="list">
+            <li th:each="book, iterStat:${fantasies}">
+              <a th:href="@{/book/{id}(id=${book.bookId})}" th:title="${book.name} + '/' + ${book.author}" th:text="${book.name}"></a>
+              <span th:if="!${iterStat.first}" th:text="'/' + ${book.author}"></span>
+            </li>
+          </ul>
+        </dd>
+      </dl>
+    </dd>
+    <dd class="catalog">
+      <dl>
+        <dt><a href="/book/index.php?type=%E4%BB%99%E4%BE%A0%E5%B0%8F%E8%AF%B4">仙侠小说</a></dt>
+        <dd class="top"><a href="/book/4313/index.html" title="人渣反派自救系统"><img
+                src="/book/cover.pic/cover_4313.jpg" alt="人渣反派自救系统" /></a>
+          <div>
+            <h3><a href="/book/4313/index.html" title="人渣反派自救系统">人渣反派自救系统</a></h3>
+            <div class="intro">身为《狂傲仙魔途》的资深读者，沈垣对这篇文是大大的不满。
+              “傻逼作者傻逼文！”临终前他骂了这么一句，于是──
+              【启动码：傻逼作者傻逼文。自动触发系统。】
+              他重生到一本自己刚读完还嫌弃过的暗黑系种马小说了！
+              而且天杀的，他的角色还是男主角那位人渣反派师尊沈清秋！
+              说到沈清秋，虽然有外表、有修为，但为人还真是格外没品。
+              欺负打压男主角不说，还残害同门，道貌岸然，内心淫邪……
+              这样一个坏到天怒人怨的角色，在原著里的下场当然是凄惨的，
+              男主角洛冰河最后会把他削成人棍啊我的妈，他不想死得这么惨啊！
+              于是乎，新生的沈清秋开始了避免惨死结局的艰苦之路，
+              因为他要保命，但却不能违反各种系统设定！
+              虽然艰辛，但他要趁徒弟还是可爱小绵羊的时候就开始刷好感度，
+              以免后期黑化的洛冰河称霸后，会回来报复自己。
+              只是，沈清秋这好感度可能刷过头了，
+              他没发现洛冰河看他的目光，好像，有那么点不一样了……</div>
+          </div>
+        </dd>
+        <dd>
+          <ul class="list">
+            <li><a href="/book/6139/index.html" title="莫求仙缘/蒙面怪客">莫求仙缘</a><span>/蒙面怪客</span></li>
+            <li><a href="/book/6127/index.html" title="斗米仙缘/能优斯特">斗米仙缘</a><span>/能优斯特</span></li>
+            <li><a href="/book/6126/index.html" title="刀笼/虫梦">刀笼</a><span>/虫梦</span></li>
+            <li><a href="/book/6124/index.html" title="大魏读书人/七月未时">大魏读书人</a><span>/七月未时</span></li>
+            <li><a href="/book/6117/index.html"
+                   title="不能修仙的我只有去培育魂宠了/夏竖琴">不能修仙的我只有去培育魂宠了</a><span>/夏竖琴</span></li>
+            <li><a href="/book/6116/index.html" title="拜师四目道长/东人">拜师四目道长</a><span>/东人</span></li>
+            <li><a href="/book/6017/index.html" title="仙官/随轻风去">仙官</a><span>/随轻风去</span></li>
+            <li><a href="/book/6005/index.html"
+                   title="天庭签到，终于等来大闹天宫/岳不懂">天庭签到，终于等来大闹天宫</a><span>/岳不懂</span></li>
+            <li><a href="/book/6003/index.html" title="太平客栈/莫问江湖">太平客栈</a><span>/莫问江湖</span></li>
+            <li><a href="/book/5990/index.html" title="道长，时代变了/全金属弹壳">道长，时代变了</a><span>/全金属弹壳</span>
+            </li>
+            <li><a href="/book/5985/index.html" title="从杀猪开始修仙/张老西">从杀猪开始修仙</a><span>/张老西</span></li>
+            <li><a href="/book/5981/index.html" title="仙宫/打眼">仙宫</a><span>/打眼</span></li>
+          </ul>
+        </dd>
+      </dl>
+    </dd>
+    <dd class="catalog">
+      <dl>
+        <dt><a href="/book/index.php?type=%E7%BD%91%E6%B8%B8%E5%B0%8F%E8%AF%B4">网游小说</a></dt>
+        <dd class="top"><a href="/book/171/index.html" title="全职高手"><img src="/book/cover.pic/cover_171.jpg"
+                                                                         alt="全职高手" /></a>
+          <div>
+            <h3><a href="/book/171/index.html" title="全职高手">全职高手</a></h3>
+            <div class="intro">
+              网游荣耀中被誉为教科书级别的顶尖高手叶秋（真名：叶修），因为种种原因遭到俱乐部的驱逐，离开职业圈的他寄身于一家网吧成了一个小小的网管，但是，拥有十年游戏经验的他，在荣耀新开的第十区重新投入了游戏，带着对往昔的回忆，和一把未完成的自制武器，开始了重返巅峰之路。
+              勾心斗角之后，谁夺走了我的荣耀，风雨飘摇之下，希望却不曾破灭。花团锦簇之中，没有迷失了方向。万众瞩目之前，我，就在这里回归了！</div>
+          </div>
+        </dd>
+        <dd>
+          <ul class="list">
+            <li><a href="/book/6012/index.html" title="我有一群地球玩家/第七个魔方">我有一群地球玩家</a><span>/第七个魔方</span>
+            </li>
+            <li><a href="/book/5904/index.html" title="斩月/失落叶">斩月</a><span>/失落叶</span></li>
+            <li><a href="/book/5891/index.html" title="世界树的游戏/咯嘣">世界树的游戏</a><span>/咯嘣</span></li>
+            <li><a href="/book/5890/index.html" title="神话三国领主/大汉护卫">神话三国领主</a><span>/大汉护卫</span></li>
+            <li><a href="/book/5837/index.html" title="猎魔烹饪手册/颓废龙">猎魔烹饪手册</a><span>/颓废龙</span></li>
+            <li><a href="/book/5830/index.html" title="法师乔安/程剑心">法师乔安</a><span>/程剑心</span></li>
+            <li><a href="/book/5780/index.html" title="他来自虚空/可能有猫饼">他来自虚空</a><span>/可能有猫饼</span></li>
+            <li><a href="/book/5779/index.html" title="死灵神话/羽民">死灵神话</a><span>/羽民</span></li>
+            <li><a href="/book/5773/index.html" title="亏成首富从游戏开始/青衫取醉">亏成首富从游戏开始</a><span>/青衫取醉</span>
+            </li>
+            <li><a href="/book/5745/index.html" title="我的混沌城/凌虚月影">我的混沌城</a><span>/凌虚月影</span></li>
+            <li><a href="/book/5726/index.html" title="法爷永远是你大爷/翔炎">法爷永远是你大爷</a><span>/翔炎</span></li>
+            <li><a href="/book/5725/index.html" title="都市的变形德鲁伊/易伤秋者">都市的变形德鲁伊</a><span>/易伤秋者</span>
+            </li>
+          </ul>
+        </dd>
+      </dl>
+    </dd>
+    <dd class="catalog">
+      <dl>
+        <dt><a href="/book/index.php?type=%E7%A9%BF%E8%B6%8A%E5%B0%8F%E8%AF%B4">穿越小说</a></dt>
+        <dd class="top"><a href="/book/1311/index.html" title="国医高手"><img
+                src="/book/cover.pic/cover_1311.jpg" alt="国医高手" /></a>
+          <div>
+            <h3><a href="/book/1311/index.html" title="国医高手">国医高手</a></h3>
+            <div class="intro">本书原名《医道官途》，出版时改名为《国医高手》。
+              几乎所有人都知道隋末第一条好汉是李元霸，却没几个知道隋末第一圣手是张一针。
+              张一针不是个英雄，虽然医术高超，可是从来不做没有回报的事情,张一针治好的富人多，基本上都是给了银子的，张一针治好的女人多，对于这种不良医生野史都羞于记载。
+              张一针死的很惨，武功已臻化境的他先是喝下隋炀帝的毒酒，然后被一名御林军乱箭攒心,起因却是他不计报酬的救活了隋炀帝难产的贵妃，所以他很感到很冤枉，做好事救了母子两条命，竟然落到这个结局，真是千古奇冤。
+              后世科学证明，怨气的能量可以穿越时空，是为怨气冲天，所以张一针同志也成为千百万穿越众中的一员，很幸运的穿越了。</div>
+          </div>
+        </dd>
+        <dd>
+          <ul class="list">
+            <li><a href="/book/5888/index.html" title="能穿越的我该怎么浪/末羽">能穿越的我该怎么浪</a><span>/末羽</span></li>
+            <li><a href="/book/5693/index.html" title="我真的不是气运之子/云中殿">我真的不是气运之子</a><span>/云中殿</span>
+            </li>
+            <li><a href="/book/5670/index.html" title="全球战国/混吃等死">全球战国</a><span>/混吃等死</span></li>
+            <li><a href="/book/5488/index.html" title="红楼名侦探/嗷世巅锋">红楼名侦探</a><span>/嗷世巅锋</span></li>
+            <li><a href="/book/5182/index.html" title="乘龙佳婿/府天">乘龙佳婿</a><span>/府天</span></li>
+            <li><a href="/book/5088/index.html" title="城姬三国/绅士东">城姬三国</a><span>/绅士东</span></li>
+            <li><a href="/book/4494/index.html" title="幻想世界大穿越/辰一十一">幻想世界大穿越</a><span>/辰一十一</span></li>
+            <li><a href="/book/4326/index.html" title="穿越时空再续情缘/枫之幻想">穿越时空再续情缘</a><span>/枫之幻想</span>
+            </li>
+            <li><a href="/book/4049/index.html" title="心意萌龙/扣子依依">心意萌龙</a><span>/扣子依依</span></li>
+            <li><a href="/book/3927/index.html" title="穿越与反穿越/妖舟">穿越与反穿越</a><span>/妖舟</span></li>
+            <li><a href="/book/3876/index.html" title="秀丽江山4·朱雀卷/李歆">秀丽江山4·朱雀卷</a><span>/李歆</span></li>
+            <li><a href="/book/3875/index.html" title="秀丽江山3·玄武卷/李歆">秀丽江山3·玄武卷</a><span>/李歆</span></li>
+          </ul>
+        </dd>
+      </dl>
+    </dd>
+    <dd class="catalog">
+      <dl>
+        <dt><a href="/book/index.php?type=%E9%83%BD%E5%B8%82%E5%B0%8F%E8%AF%B4">都市小说</a></dt>
+        <dd class="top"><a href="/book/970/index.html" title="问鼎"><img src="/book/cover.pic/cover_970.jpg"
+                                                                       alt="问鼎" /></a>
+          <div>
+            <h3><a href="/book/970/index.html" title="问鼎">问鼎</a></h3>
+            <div class="intro">《问鼎》是何常在所著一部官场类小说，连载时原名《官神》，现改名为《问鼎》集结出版。
+              为官者达到举重若轻、点石成金、出神入化的境界，是为官神。
+              慧眼看红尘，做官如有神。
+              重生的夏想站在大学毕业的路口，回味错过的人生，珍惜眼前的时机，他要自己规划自己的人生，从县委书记秘书起步，官运亨通，步步高升，跑步进入了官场。
+              免责声明：如果与现实有雷同之处，可以理解为绝对巧合，也可以理解为是平行空间的影射，请勿对号入座。</div>
+          </div>
+        </dd>
+        <dd>
+          <ul class="list">
+            <li><a href="/book/6140/index.html" title="你有科学，我有神功/欢颜笑语">你有科学，我有神功</a><span>/欢颜笑语</span>
+            </li>
+            <li><a href="/book/6137/index.html" title="离婚后前妻成了债主/啊欢">离婚后前妻成了债主</a><span>/啊欢</span></li>
+            <li><a href="/book/6136/index.html" title="老兵新警/卓牧闲">老兵新警</a><span>/卓牧闲</span></li>
+            <li><a href="/book/6135/index.html" title="开局站在人生巅峰/月沧狼">开局站在人生巅峰</a><span>/月沧狼</span></li>
+            <li><a href="/book/6125/index.html" title="带着医院回80年/烤饺">带着医院回80年</a><span>/烤饺</span></li>
+            <li><a href="/book/6023/index.html" title="重生之苍莽人生/velver">重生之苍莽人生</a><span>/velver</span>
+            </li>
+            <li><a href="/book/6021/index.html" title="硬核厨爸/旁墨">硬核厨爸</a><span>/旁墨</span></li>
+            <li><a href="/book/6013/index.html" title="我有一座野生动物园/可口的橘子">我有一座野生动物园</a><span>/可口的橘子</span>
+            </li>
+            <li><a href="/book/6010/index.html" title="我老婆是传奇天后/南国月三更">我老婆是传奇天后</a><span>/南国月三更</span>
+            </li>
+            <li><a href="/book/6006/index.html" title="土味巨星/旋转蘑菇木偶">土味巨星</a><span>/旋转蘑菇木偶</span></li>
+            <li><a href="/book/6004/index.html" title="腾飞我的航空时代/安溪柚">腾飞我的航空时代</a><span>/安溪柚</span></li>
+            <li><a href="/book/6002/index.html" title="首富从谈恋爱开始/王戈多">首富从谈恋爱开始</a><span>/王戈多</span></li>
+          </ul>
+        </dd>
+      </dl>
+    </dd>
+    <dd class="catalog">
+      <dl>
+        <dt><a href="/book/index.php?type=%E7%A7%91%E5%B9%BB%E5%B0%8F%E8%AF%B4">科幻小说</a></dt>
+        <dd class="top"><a href="/book/15/index.html" title="吞噬星空"><img src="/book/cover.pic/cover_15.jpg"
+                                                                        alt="吞噬星空" /></a>
+          <div>
+            <h3><a href="/book/15/index.html" title="吞噬星空">吞噬星空</a></h3>
+            <div class="intro">
+              “这颗星球，通体土黄色，没有任何生命存在，直径21000公里，咦，竟然蕴含“星泪金”矿脉，真是天助我也，将这颗星球吞噬掉后，我的实力应该能恢复到受伤前的80%。”脸色苍白的罗峰盘膝坐在一颗飞行的陨石上，遥看远处的一颗无生命存在的行星。
+              番茄第六部小说《吞噬星空》，将为读者展现出一个浩瀚广阔，神秘莫测的未来世界。</div>
+          </div>
+        </dd>
+        <dd>
+          <ul class="list">
+            <li><a href="/book/6133/index.html" title="九星之主/育">九星之主</a><span>/育</span></li>
+            <li><a href="/book/6132/index.html" title="火力法则/如水意">火力法则</a><span>/如水意</span></li>
+            <li><a href="/book/6130/index.html" title="哈迪帝国1945/昨夜大雨">哈迪帝国1945</a><span>/昨夜大雨</span>
+            </li>
+            <li><a href="/book/6018/index.html" title="星球建造师/火洞">星球建造师</a><span>/火洞</span></li>
+            <li><a href="/book/6016/index.html" title="戏精的诞生/燃冷光">戏精的诞生</a><span>/燃冷光</span></li>
+            <li><a href="/book/6011/index.html" title="我能赋予万物本源/落花独立">我能赋予万物本源</a><span>/落花独立</span>
+            </li>
+            <li><a href="/book/6009/index.html" title="我不是至高神/黑山青狐">我不是至高神</a><span>/黑山青狐</span></li>
+            <li><a href="/book/5999/index.html" title="全球神祇时代/一夕成道">全球神祇时代</a><span>/一夕成道</span></li>
+            <li><a href="/book/5982/index.html" title="超级母舰/空长青">超级母舰</a><span>/空长青</span></li>
+            <li><a href="/book/5908/index.html" title="诸天最强大佬/七只跳蚤">诸天最强大佬</a><span>/七只跳蚤</span></li>
+            <li><a href="/book/5896/index.html" title="我能升级避难所/十七筝">我能升级避难所</a><span>/十七筝</span></li>
+            <li><a href="/book/5886/index.html" title="纳米崛起/岭南仨人">纳米崛起</a><span>/岭南仨人</span></li>
+          </ul>
+        </dd>
+      </dl>
+    </dd>
+  </dl>
+  <div class="link"></div>
+</div>
+<div id="hetu"></div>
+<div class="foot">
+  网站简介 | 商务合作 | 版权声明 | 联系我们 | 网站地图<p>Copyright&nbsp;@&nbsp;2022&nbsp;&nbsp;All Rights Reserved.</p>
+</div>
+<!--<script type="text/javascript">-->
+<!--  //<![CDATA[-->
+<!--  scrollTop.init();-->
+<!--  //]]>-->
+<!--</script>-->
+</body>
+
 </html>
