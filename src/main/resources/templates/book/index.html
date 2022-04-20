@@ -1,19 +1,15 @@
 <!DOCTYPE HTML>
-<html lang="zh-Hans">
+<html lang="zh-Hans" xmlns:th="https://www.thymeleaf.org">
 
 <head>
   <meta charset="utf-8" />
-  <meta name="Copyright" content="和图书" />
+  <meta name="Copyright" content="畅读阁" />
   <meta name="keywords" content="免费阅读,在线阅读,免费小说,电子书,书籍,小说" />
-  <meta name="description" content="和图书是一个提供各种热门电子书,书籍,小说免费在线阅读的网站，我们致力于为在线阅读提供良好的阅读体验" />
-  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-  <link rel="alternate" hreflang="zh-Hant" href="https://m.hetubook.com/book/index.php" />
-  <link rel="alternate" media="only screen and (max-width: 640px)" href="https://m.hetushu.com/book/index.php" />
-  <link type="text/css" rel="stylesheet" href="/command/hetu.css" />
-  <script type="text/javascript" src="/command/language.js"></script>
-  <script type="text/javascript" src="/command/hetu.js"></script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4166898652148554"
-          crossorigin="anonymous"></script>
+  <meta name="description" content="畅读阁是一个提供各种热门电子书,书籍,小说免费在线阅读的网站，我们致力于为在线阅读提供良好的阅读体验" />
+  <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+  <link rel="alternate" hreflang="zh-Hant" href="index.html" />
+  <link rel="alternate" media="only screen and (max-width: 640px)" href="index.html" />
+  <link type="text/css" rel="stylesheet" href="/css/changdu.css" />
   <style type="text/css">
     #left {
       float: left;
@@ -166,7 +162,7 @@
     .arrow {
       height: 9px;
       width: 6px;
-      background: url(/images/hetu.png) no-repeat;
+      background: url(/images/changdu.png) no-repeat;
       position: absolute;
       top: 70px;
       font-size: 0;
@@ -201,7 +197,7 @@
       height: 37px;
       width: 37px;
       line-height: 37px;
-      background: url(/images/hetu.png) -24px -44px;
+      background: url(/images/changdu.png) -24px -44px;
       vertical-align: middle;
       margin: 0 5px;
       color: #7f7f7f;
@@ -285,367 +281,62 @@
       font-weight: bold;
     }
   </style>
-  <title>和图书_玄幻小说</title>
+  <title th:text="'畅读阁' + ((${type}==null or ${type}=='')?'':'_' + ${type})">畅读阁</title>
 
 <body>
-<div class="head">
-  <span id="title">和图书</span>
-  <form id="form1" method="get" action="/book/search.php" target="_blank">
-    <div id="search_box">
-      <input type="text" id="keyword" name="keyword" placeholder="请输入搜索内容..." /><button id="search_b"
-                                                                                        type="submit">搜索</button>
-    </div>
-  </form>
-  <div class="edition">
-    简体版 | <a href="https://www.hetubook.com">繁體版</a> </div>
-</div>
-<div class="menu">
-  <a href="/index.php">首页</a>
-  <a href="/book/index.php">小说</a>
-  <a href="/top/index.php">榜单</a>
-  <a href="/favorite/index.php">书架</a>
-  <a id="m" href="https://m.hetushu.com/book/index.php">手机阅读</a>
-</div>
+<div th:include="common/header :: header"></div>
 <div class="body">
   <div id="left">
     <ul class="catalog">
-      <dt><a href="index.php">全部小说分类</a></dt>
-      <dd><a href="?type=%E7%BD%91%E6%B8%B8%E5%B0%8F%E8%AF%B4">网游小说</a></dd>
-      <dd class="current"><a href="?type=%E7%8E%84%E5%B9%BB%E5%B0%8F%E8%AF%B4">玄幻小说</a></dd>
-      <dd><a href="?type=%E7%A9%BF%E8%B6%8A%E5%B0%8F%E8%AF%B4">穿越小说</a></dd>
-      <dd><a href="?type=%E7%A7%91%E5%B9%BB%E5%B0%8F%E8%AF%B4">科幻小说</a></dd>
-      <dd><a href="?type=%E4%BB%99%E4%BE%A0%E5%B0%8F%E8%AF%B4">仙侠小说</a></dd>
-      <dd><a href="?type=%E9%83%BD%E5%B8%82%E5%B0%8F%E8%AF%B4">都市小说</a></dd>
-      <dd><a href="?type=%E6%AD%A6%E4%BE%A0%E5%B0%8F%E8%AF%B4">武侠小说</a></dd>
-      <dd><a href="?type=%E5%8E%86%E5%8F%B2%E5%B0%8F%E8%AF%B4">历史小说</a></dd>
-      <dd><a href="?type=%E7%AB%9E%E6%8A%80%E5%B0%8F%E8%AF%B4">竞技小说</a></dd>
-      <dd><a href="?type=%E8%A8%80%E6%83%85%E5%B0%8F%E8%AF%B4">言情小说</a></dd>
-      <dd><a href="?type=%E6%82%AC%E7%96%91%E5%B0%8F%E8%AF%B4">悬疑小说</a></dd>
-      <dd><a href="?type=%E5%86%9B%E4%BA%8B%E5%B0%8F%E8%AF%B4">军事小说</a></dd>
-      <dd><a href="?type=%E7%81%B5%E5%BC%82%E5%B0%8F%E8%AF%B4">灵异小说</a></dd>
+      <dt><a href="/book/index">全部小说分类</a></dt>
+      <dd th:class="${type}=='网游小说'?'current':''"><a href="/book/index?type=%E7%BD%91%E6%B8%B8%E5%B0%8F%E8%AF%B4">网游小说</a></dd>
+      <dd th:class="${type}=='玄幻小说'?'current':''"><a href="/book/index?type=%E7%8E%84%E5%B9%BB%E5%B0%8F%E8%AF%B4">玄幻小说</a></dd>
+      <dd th:class="${type}=='科幻小说'?'current':''"><a href="/book/index?type=%E7%A7%91%E5%B9%BB%E5%B0%8F%E8%AF%B4">科幻小说</a></dd>
+      <dd th:class="${type}=='修真小说'?'current':''"><a href="/book/index?type=%E4%BF%AE%E7%9C%9F%E5%B0%8F%E8%AF%B4">修真小说</a></dd>
+      <dd th:class="${type}=='都市小说'?'current':''"><a href="/book/index?type=%E9%83%BD%E5%B8%82%E5%B0%8F%E8%AF%B4">都市小说</a></dd>
+      <dd th:class="${type}=='历史小说'?'current':''"><a href="/book/index?type=%E5%8E%86%E5%8F%B2%E5%B0%8F%E8%AF%B4">历史小说</a></dd>
     </ul>
   </div>
   <div id="right">
-    <div class="title">
-      <a href="index.php">全部小说</a> &gt; 玄幻小说</div>
-    <div class="state"><a href="index.php?type=%E7%8E%84%E5%B9%BB%E5%B0%8F%E8%AF%B4" class="current">全部</a><a
-            href="?type=%E7%8E%84%E5%B9%BB%E5%B0%8F%E8%AF%B4&amp;state=2">完本</a><a
-            href="?type=%E7%8E%84%E5%B9%BB%E5%B0%8F%E8%AF%B4&amp;state=1">连载</a></div>
+    <div class="title" >
+      <a href="/book/index">全部小说</a> <span th:text="(${type}==null or ${type}=='')?'':'&gt;' + ${type}"></span></div>
+    <div class="state">
+      <a href="/book/index?type=%E7%8E%84%E5%B9%BB%E5%B0%8F%E8%AF%B4" th:class="(${state}!=1 and ${state}!=2)?'current':''">全部</a>
+      <a href="/book/index?type=%E7%8E%84%E5%B9%BB%E5%B0%8F%E8%AF%B4&amp;state=2" th:class="${state}==2?'current':''">完本</a>
+      <a href="/book/index?type=%E7%8E%84%E5%B9%BB%E5%B0%8F%E8%AF%B4&amp;state=1" th:class="${state}==1?'current':''">连载</a></div>
     <ul id="list" class="book_list">
-      <li><a href="/book/6134/index.html"><img src="/book/cover.pic/cover_6134.jpg" alt="旧日学霸" /></a>
-        <div class="name"><a href="/book/6134/index.html" title="旧日学霸">旧日学霸</a></div>
-        <div class="author_box"><span class="complete">完本</span><span class="author" title="钟不暮">钟不暮</span>
+      <li th:each="book:${books}">
+        <a th:href="@{/book/{id}(id=${book.bookId})}">
+          <img th:src="${book.cover}" th:alt="${book.name}"/>
+        </a>
+        <div class="name">
+          <a th:href="@{/book/{id}(id=${book.bookId})}" th:title="${book.name}" th:text="${book.name}"></a>
+        </div>
+        <div class="author_box">
+          <span th:class="${book.statusCode == 0}?'complete':'continue'" th:text="${book.status}"></span>
+          <span class="author" th:title="${book.author}" th:text="${book.author}"></span>
         </div>
         <div class="note_box">
           <div class="note">
-            <h4>旧日学霸</h4><span>作者:钟不暮</span>
-            <div class="intro">
-              <p>你阅读了《神秘学概论》，学科知识点 100！</p>
-              <p>你阅读了《基础魔药粗解》，无师自通领悟魔药女妖之嚎！</p>
-              <p>你阅读了《魔动能理论》，成功制造出了以水为燃料的鬼火机车！</p>
-              <p>你开始沉思，你已经持续沉思十分钟。</p>
-              <p>这是个学习就会掉SAN值的世界，这里灵气复苏，旧神窥视，妖魔纵横。这里充斥着各种奇幻的机械造物，这里有力可平山的强大武者，有不可名状的超凡之力。</p>
-              <p>你不在犹豫，翻开了神秘学课本，心中大喊道：</p>
-              <p>“系统，给我再刷一万册题！”</p>
-            </div>
-          </div>
-          <div class="arrow"></div>
-        </div>
-      </li>
-      <li><a href="/book/6131/index.html"><img src="/book/cover.pic/cover_6131.jpg" alt="红龙皇帝" /></a>
-        <div class="name"><a href="/book/6131/index.html" title="红龙皇帝">红龙皇帝</a></div>
-        <div class="author_box"><span class="complete">完本</span><span class="author" title="笑筱笙">笑筱笙</span>
-        </div>
-        <div class="note_box">
-          <div class="note">
-            <h4>红龙皇帝</h4><span>作者:笑筱笙</span>
-            <div class="intro">
-              <p>穿越成人人喊打的恶龙，这可咋办？</p>
-              <p>……</p>
-              <p>老版简介：</p>
-              <p>红龙！</p>
-              <p>五色恶龙之首！邪恶阵营扛把子！人人喊打的主儿！</p>
-              <p>何塞不想挨打，因此他重拾种花家的种族天赋——低调种田发育。</p>
-              <p>发育到足够强再出来实现自己的愿望：盖一间百万平方米的房子遮风挡雨，再雇佣几亿仆人摇旗呐喊。</p>
-              <p>如此朴素的愿望！</p>
-              <p>过分吗？！</p>
-              <p>总的来说，这是一头红龙在异界蛰伏发育，获得各种神奇的能力（【不死鸟之心】、【洗脑光环】……），最终让整个世界匍匐在王座之下的故事。</p>
-              <p>关键词：伪DND、艾泽拉斯、龙、稳健流、领主种田、争霸多元宇宙、正反派智商在线。</p>
-            </div>
-          </div>
-          <div class="arrow"></div>
-        </div>
-      </li>
-      <li><a href="/book/6120/index.html"><img src="/book/cover.pic/cover_6120.jpg" alt="从拔出石中剑开始" /></a>
-        <div class="name"><a href="/book/6120/index.html" title="从拔出石中剑开始">从拔出石中剑开始</a></div>
-        <div class="author_box"><span class="complete">完本</span><span class="author"
-                                                                      title="饮马流泉">饮马流泉</span></div>
-        <div class="note_box">
-          <div class="note">
-            <h4>从拔出石中剑开始</h4><span>作者:饮马流泉</span>
-            <div class="intro">
-              <p>艾力转生平行世界，此地血脉显圣，强者为尊，东方屹立着大唐帝国，西方则处于日不落帝国的统治之下。</p>
-              <p>他出国旅游时，不小心召唤出日不落镇国神器——石中剑。</p>
-              <p>半小时后，皇室长公主从天而降，持剑指向艾力：东方人，要么娶我为妻，要么日不落向大唐宣战！</p>
-              <p>……</p>
-              <p>一个月后，艾力看着千娇百媚的魅魔女仆、人鱼姐妹等侍女，以及各种奇珍异宝、大豪斯、大牧场，还有私人飞机、游艇、跑车等等礼物，只想说一句话：</p>
-              <p>真香！</p>
-            </div>
-          </div>
-          <div class="arrow"></div>
-        </div>
-      </li>
-      <li><a href="/book/6020/index.html"><img src="/book/cover.pic/cover_6020.jpg" alt="异种骑士团" /></a>
-        <div class="name"><a href="/book/6020/index.html" title="异种骑士团">异种骑士团</a></div>
-        <div class="author_box"><span class="complete">完本</span><span class="author" title="夜尽长">夜尽长</span>
-        </div>
-        <div class="note_box">
-          <div class="note">
-            <h4>异种骑士团</h4><span>作者:夜尽长</span>
-            <div class="intro">
-              <p>生命工程专业的副教授，穿越至中世纪欧洲的异世界，利用现代生物化学技术，发现人类历史上早已灭绝的病毒、细菌、寄生虫，居然是异能力的来源。</p>
-              <p>他挽救并整合了被俗世称为“异种”的人群，建立起横扫千军的异种骑士团，在中世纪里掀起了一场革命的狂潮。</p>
-              <p>架空世界、奇幻背景、称霸主线、剧情稍稍严肃、略微涉及生化知识。</p>
-              <p>前面的章节有些沉闷，越往后越精彩。</p>
-            </div>
-          </div>
-          <div class="arrow"></div>
-        </div>
-      </li>
-      <li><a href="/book/6019/index.html"><img src="/book/cover.pic/cover_6019.jpg" alt="修罗丹神" /></a>
-        <div class="name"><a href="/book/6019/index.html" title="修罗丹神">修罗丹神</a></div>
-        <div class="author_box"><span class="complete">完本</span><span class="author" title="空神">空神</span>
-        </div>
-        <div class="note_box">
-          <div class="note">
-            <h4>修罗丹神</h4><span>作者:空神</span>
-            <div class="intro">
-              <p>天刀魔神秦阳修为达到半步主宰，可痛失爱妻，冒着极大风险，他毅然动用轮回圣钟回到了少年时期。</p>
-              <p>漂亮师姐成为护卫，极品富家千金成为侍女，强盛丹宗的丹女求着成为丫鬟。</p>
-              <p>清纯圣女，娇媚魔女，帝国公主，精灵女皇，一个个倾国倾城的美人也纷纷缠着秦阳。</p>
-              <p>秦阳一颗心却全在自己认定的妻子身上。</p>
-            </div>
-          </div>
-          <div class="arrow"></div>
-        </div>
-      </li>
-      <li><a href="/book/6014/index.html"><img src="/book/cover.pic/cover_6014.jpg" alt="我在娘胎已无敌" /></a>
-        <div class="name"><a href="/book/6014/index.html" title="我在娘胎已无敌">我在娘胎已无敌</a></div>
-        <div class="author_box"><span class="complete">完本</span><span class="author"
-                                                                      title="沉沦和尚">沉沦和尚</span></div>
-        <div class="note_box">
-          <div class="note">
-            <h4>我在娘胎已无敌</h4><span>作者:沉沦和尚</span>
-            <div class="intro">
-              <p>先天神道胎，混沌种青莲，不灭元始经，未出生我已无敌！</p>
-              <p>九天最强祖神宁尘重活一世，于凡尘中崛起，踏上热血争霸之路，跨千山万水，闯九天十地，一路横扫无敌，只为斩尽前世敌，救最爱之人……</p>
-            </div>
-          </div>
-          <div class="arrow"></div>
-        </div>
-      </li>
-      <li><a href="/book/6008/index.html"><img src="/book/cover.pic/cover_6008.jpg" alt="位面之狩猎万界" /></a>
-        <div class="name"><a href="/book/6008/index.html" title="位面之狩猎万界">位面之狩猎万界</a></div>
-        <div class="author_box"><span class="complete">完本</span><span class="author" title="闭口禅">闭口禅</span>
-        </div>
-        <div class="note_box">
-          <div class="note">
-            <h4>位面之狩猎万界</h4><span>作者:闭口禅</span>
-            <div class="intro">
-              <p>拥有‘魔兽猎人技能’的黄少宏，行走在诸天万界的故事！</p>
-            </div>
-          </div>
-          <div class="arrow"></div>
-        </div>
-      </li>
-      <li><a href="/book/5998/index.html"><img src="/book/cover.pic/cover_5998.jpg" alt="末日圆环" /></a>
-        <div class="name"><a href="/book/5998/index.html" title="末日圆环">末日圆环</a></div>
-        <div class="author_box"><span class="complete">完本</span><span class="author"
-                                                                      title="夜影恋姬">夜影恋姬</span></div>
-        <div class="note_box">
-          <div class="note">
-            <h4>末日圆环</h4><span>作者:夜影恋姬</span>
-            <div class="intro">
-              <p>废土时代，四大环形高墙隔绝了人类与异种的世界，也被人们称作末世圆环。</p>
-              <p>吕落很意外的来到了这个世界，突然出现的危机让他有些无措时，他的视线里出现了这样的提示：</p>
-              <p>【你弱的让人窒息，虽然你觉醒了S-02-吞噬者，S-04-融合者，但其实并没有什么卵用。</p>
-              <p>现在真正能够帮你脱离危机，带你走上人生巅峰的，只有序列S-11观察者。】</p>
-              <p>【以上评价，来自高贵的S级序列-11：观察者的中肯分析。】</p>
-              <p>吕落：“？这评价，好中肯啊！”</p>
-              <p>……</p>
-              <p>【S-02-吞噬者】</p>
-              <p>吞噬一切能量物质。</p>
-              <p>【S-04-融合者】</p>
-              <p>怨灵之刃-合成方案：张哲的怀表 沉睡魔女的发丝3根 畸形种手骨 能量249点 暗灵石1克。</p>
-              <p>【S-11-观察者】</p>
-              <p>情况1：那个妹子朝你冲过来了，还有这种好事？我看她一定是疯掉了。</p>
-              <p>情况2：高贵的S级序列观察者不想回答你的问题，你太菜了，还是先加点吧。</p>
-              <p>情况3：女人只会影响你拔剑的速度，变强最终要的就是远离女人！</p>
-              <p>……</p>
-              <p>人类文明的高墙，扭曲变异的畸形异种，人类强大的天赋序列，一切都只是这个世界的一角。</p>
-              <p>当末世圆环转动的时候，吕落脑海中的圆盘也同样转动了。</p>
-            </div>
-          </div>
-          <div class="arrow"></div>
-        </div>
-      </li>
-      <li><a href="/book/5996/index.html"><img src="/book/cover.pic/cover_5996.jpg" alt="昆仑第一圣" /></a>
-        <div class="name"><a href="/book/5996/index.html" title="昆仑第一圣">昆仑第一圣</a></div>
-        <div class="author_box"><span class="complete">完本</span><span class="author"
-                                                                      title="怕辣的红椒">怕辣的红椒</span></div>
-        <div class="note_box">
-          <div class="note">
-            <h4>昆仑第一圣</h4><span>作者:怕辣的红椒</span>
-            <div class="intro">
-              <p>大荒世界神魔遍地。</p>
-              <p>江澜成为昆仑弟子，知晓外面危险的他决定躲在门内闭关修炼。</p>
-              <p>做一个低调的昆仑弟子。</p>
-              <p>只是在他某次闭关出来，师父带来了一条消息。</p>
-              <p>昆仑给他找了个未婚妻。</p>
-            </div>
-          </div>
-          <div class="arrow"></div>
-        </div>
-      </li>
-      <li><a href="/book/5994/index.html"><img src="/book/cover.pic/cover_5994.jpg" alt="剑圣的星际万事屋" /></a>
-        <div class="name"><a href="/book/5994/index.html" title="剑圣的星际万事屋">剑圣的星际万事屋</a></div>
-        <div class="author_box"><span class="complete">完本</span><span class="author"
-                                                                      title="打死不鸽">打死不鸽</span></div>
-        <div class="note_box">
-          <div class="note">
-            <h4>剑圣的星际万事屋</h4><span>作者:打死不鸽</span>
-            <div class="intro">
-              <p>穿越到科技、武道和神秘并存的星际宇宙，李遥在系统的鞭策下，刚在十里星砍怪五百年刷到剑圣，马上又接到系统要他征服宇宙的新任务……征服你妹！你知道这五百年怎么过的吗？厌倦为系统打工的李遥，拒绝了征服宇宙的任务，决心享受生活，于是开了家面向全宇宙美女的星际万事屋，为富婆寻找龙猫，帮农妇开垦荒星，给少女教授剑道……每天下午三点就能饮茶了，不香吗？
-              </p>
-              <p>【叮——征服宇宙任务完成度1%！】</p>
-              <p>淦！</p>
-            </div>
-          </div>
-          <div class="arrow"></div>
-        </div>
-      </li>
-      <li><a href="/book/5993/index.html"><img src="/book/cover.pic/cover_5993.jpg" alt="哈利波特之学霸无敌" /></a>
-        <div class="name"><a href="/book/5993/index.html" title="哈利波特之学霸无敌">哈利波特之学霸无敌</a></div>
-        <div class="author_box"><span class="complete">完本</span><span class="author" title="桐棠">桐棠</span>
-        </div>
-        <div class="note_box">
-          <div class="note">
-            <h4>哈利波特之学霸无敌</h4><span>作者:桐棠</span>
-            <div class="intro">
-              <p>本书又名《霍格沃茨万事皆三》。</p>
-              <p>一、剧情：艾伦·哈里斯重生HP世界，试图改革巫师教育，打破《保密法》——最终Boss 不是伏地魔，是另一位原著中存在的角色。</p>
-              <p>二、风格：本文非真系统文，依据HP风格，故事剧情的开展一本比一本黑暗。</p>
-              <p>三、特点：万事皆三，JK罗琳用了7作为特别数字，而本文中，3则是一个有魔力的数字。万物归环，事物都是循环的，时间的洪流里，凡事皆有因由。</p>
-            </div>
-          </div>
-          <div class="arrow"></div>
-        </div>
-      </li>
-      <li><a href="/book/5992/index.html"><img src="/book/cover.pic/cover_5992.jpg" alt="怪物被杀就会死" /></a>
-        <div class="name"><a href="/book/5992/index.html" title="怪物被杀就会死">怪物被杀就会死</a></div>
-        <div class="author_box"><span class="complete">完本</span><span class="author"
-                                                                      title="阴天神隐">阴天神隐</span></div>
-        <div class="note_box">
-          <div class="note">
-            <h4>怪物被杀就会死</h4><span>作者:阴天神隐</span>
-            <div class="intro">
-              <p>——异于常人者，即为怪物——</p>
-              <p>天生就是超能者，所到之处百鬼退避，捏碎骨头就和捏碎奶油饼干一样没有区别。</p>
-              <p>太过特殊，其实不是什么好事，为了在这看似平凡的世界中寻找同类，苏昼十年来一路奔波寻觅，却都一无所获……直到灵气复苏突然的到来，为他拉开了一个广袤浩瀚的时代大幕。</p>
-              <p>期待改变，期待超凡，苏昼并不希望看着这个世界燃烧，但他渴望世界变得热闹起来。</p>
-              <p>千里独行，诸界漫步。</p>
-              <p>路见不平，拔刀相助。</p>
-              <p>即便在这充斥着怪物，邪魔与无数妖魔鬼怪的世界中，在这濒临破碎，处于毁灭前夕的多元宇宙内，也无需退缩恐惧，无需迷茫困惑，仍要怀着一颗渴求正义，追求正确的心。</p>
-              <p>毕竟，正如同那人尽皆知的废话，‘人被杀，就会死’一样。</p>
-              <p>怪物被杀，也会死。</p>
-            </div>
-          </div>
-          <div class="arrow"></div>
-        </div>
-      </li>
-      <li><a href="/book/5991/index.html"><img src="/book/cover.pic/cover_5991.jpg" alt="放开那只妖宠" /></a>
-        <div class="name"><a href="/book/5991/index.html" title="放开那只妖宠">放开那只妖宠</a></div>
-        <div class="author_box"><span class="complete">完本</span><span class="author" title="枫霜">枫霜</span>
-        </div>
-        <div class="note_box">
-          <div class="note">
-            <h4>放开那只妖宠</h4><span>作者:枫霜</span>
-            <div class="intro">
-              <p>契约灵宠，指挥灵宠战斗，与灵宠建立羁绊，这就是这方世界独有的体系——御妖师。</p>
-              <p>李长生服用造化果，获得灵魂感应能力，拥有洞悉灵宠和宝物的能力。</p>
-              <p>太阳之子三足金乌</p>
-              <p>陆地之王黄金比蒙</p>
-              <p>尘世巨蟒耶梦加得</p>
-              <p>毁天灭地百臂巨人</p>
-              <p>穿梭时间与空间的时光龙</p>
-              <p>睁眼白昼、闭眼黑夜的烛龙</p>
-              <p>PS：致敬《口袋妖怪》、《宠魅》……</p>
-            </div>
-          </div>
-          <div class="arrow"></div>
-        </div>
-      </li>
-      <li><a href="/book/5989/index.html"><img src="/book/cover.pic/cover_5989.jpg" alt="道兄又造孽了" /></a>
-        <div class="name"><a href="/book/5989/index.html" title="道兄又造孽了">道兄又造孽了</a></div>
-        <div class="author_box"><span class="complete">完本</span><span class="author"
-                                                                      title="万古第一雪">万古第一雪</span></div>
-        <div class="note_box">
-          <div class="note">
-            <h4>道兄又造孽了</h4><span>作者:万古第一雪</span>
-            <div class="intro">
-              <p>他，天然生就招灾惹祸欠扁脸，凭借人形沙包不死身，一路走上了五行缺虐倒霉运。</p>
-              <p>当苟全性命于卑微，道兄造孽道更凶。</p>
-              <p>待他历劫归来，自挂天地东南最高枝，俯瞰众生……</p>
-            </div>
-          </div>
-          <div class="arrow"></div>
-        </div>
-      </li>
-      <li><a href="/book/5909/index.html"><img src="/book/cover.pic/cover_5909.jpg" alt="最强反套路系统" /></a>
-        <div class="name"><a href="/book/5909/index.html" title="最强反套路系统">最强反套路系统</a></div>
-        <div class="author_box"><span class="complete">完本</span><span class="author"
-                                                                      title="太上布衣">太上布衣</span></div>
-        <div class="note_box">
-          <div class="note">
-            <h4>最强反套路系统</h4><span>作者:太上布衣</span>
-            <div class="intro">
-              <p>原书名《最强装逼打脸系统》！</p>
-              <p>最强反套路，我他妈反手就是一个套路，横扫修仙界无敌手，就问一声还有谁？</p>
-              <p>装逼如风，常伴吾身！</p>
-              <p>长路漫漫，装逼相伴！</p>
-              <p>生死看淡，不服就干！</p>
-              <p>“年轻人，当年我开始装逼的时候，你们还在穿开裆裤！”</p>
-              <p>徐缺踏上了一条装逼之路，每天不是在装逼，就是正在去装逼的路上！</p>
-            </div>
-          </div>
-          <div class="arrow"></div>
-        </div>
-      </li>
-      <li><a href="/book/5903/index.html"><img src="/book/cover.pic/cover_5903.jpg" alt="御道倾天" /></a>
-        <div class="name"><a href="/book/5903/index.html" title="御道倾天">御道倾天</a></div>
-        <div class="author_box"><span class="complete">完本</span><span class="author"
-                                                                      title="风凌天下">风凌天下</span></div>
-        <div class="note_box">
-          <div class="note">
-            <h4>御道倾天</h4><span>作者:风凌天下</span>
-            <div class="intro">
-              <p>是非谁来判定，功过谁予置评？</p>
-              <p>此生不想规矩，只求随心所欲。</p>
-              <p>天机握在手中，看我飞扬跋扈。</p>
-              <p>——我是左小多，我不走寻常路。</p>
-            </div>
+            <h4 th:text="${book.name}"></h4>
+            <span th:text="'作者:' + ${book.author}"></span>
+            <div class="intro" th:text="${book.description}"></div>
           </div>
           <div class="arrow"></div>
         </div>
       </li>
     </ul>
-    <div class="page"><span class="current">1</span><a
-            href="index.php?type=%E7%8E%84%E5%B9%BB%E5%B0%8F%E8%AF%B4&amp;page=2" hideFocus>2</a><a
-            href="index.php?type=%E7%8E%84%E5%B9%BB%E5%B0%8F%E8%AF%B4&amp;page=3" hideFocus>3</a><a
-            href="index.php?type=%E7%8E%84%E5%B9%BB%E5%B0%8F%E8%AF%B4&amp;page=4" hideFocus>4</a><b>...</b><a
-            href="index.php?type=%E7%8E%84%E5%B9%BB%E5%B0%8F%E8%AF%B4&amp;page=76" hideFocus>76</a><a
-            href="index.php?type=%E7%8E%84%E5%B9%BB%E5%B0%8F%E8%AF%B4&amp;page=2" class="other next"><b></b></a>
-      <form enctype="text/plain" method="get" action="index.php">
+    <div class="page">
+      <a th:style="'display:' + @{(${page}==1?'none':'inline-block')} + ''" href="/book/index?type=%E7%8E%84%E5%B9%BB%E5%B0%8F%E8%AF%B4&amp;page=1" hideFocus>1</a>
+      <span th:class="${page}==1?'current':''" th:style="'display:' + @{(${page}==1?'inline-block':'none')} + ''">1</span>
+      <a th:style="'display:' + @{(${page}==2?'none':'inline-block')} + ''" href="/book/index?type=%E7%8E%84%E5%B9%BB%E5%B0%8F%E8%AF%B4&amp;page=2" hideFocus>2</a>
+      <span th:class="${page}==2?'current':''" th:style="'display:' + @{(${page}==2?'inline-block':'none')} + ''">2</span>
+      <a th:style="'display:' + @{(${page}==3?'none':'inline-block')} + ''" href="/book/index?type=%E7%8E%84%E5%B9%BB%E5%B0%8F%E8%AF%B4&amp;page=3" hideFocus>3</a>
+      <span th:class="${page}==3?'current':''" th:style="'display:' + @{(${page}==3?'inline-block':'none')} + ''">3</span>
+      <a th:style="'display:' + @{(${page}==4?'none':'inline-block')} + ''" href="/book/index?type=%E7%8E%84%E5%B9%BB%E5%B0%8F%E8%AF%B4&amp;page=4" hideFocus>4</a>
+      <span th:class="${page}==4?'current':''" th:style="'display:' + @{(${page}==4?'inline-block':'none')} + ''">4</span>
+      <a th:href="'/book/index?type=%E7%8E%84%E5%B9%BB%E5%B0%8F%E8%AF%B4&amp;page=' + (${page} + 1)" class="other next"><b></b></a>
+      <form enctype="text/plain" method="get" action="/book/index">
         <div><input type="hidden" name="type" value="玄幻小说">跳转到:<input name="page" type="text" /><button
                 type="submit" hideFocus>GO</button></div>
       </form>
@@ -656,31 +347,6 @@
 <div class="foot">
   网站简介 | 商务合作 | 版权声明 | 联系我们 | 网站地图<p>Copyright&nbsp;@&nbsp;2022&nbsp;&nbsp;All Rights Reserved.</p>
 </div>
-<script type="text/javascript" src="/command/init.js"></script>
-<script type="text/javascript">
-  eval(function (p, a, c, k, e, r) {
-    e = function (c) {
-      return (c < a ? '' : e(parseInt(c / a))) + ((c = c % a) > 35 ? String.fromCharCode(c + 29) :
-              c.toString(36))
-    };
-    if (!''.replace(/^/, String)) {
-      while (c--) r[e(c)] = k[c] || e(c);
-      k = [function (e) {
-        return r[e]
-      }];
-      e = function () {
-        return '\\w+'
-      };
-      c = 1
-    };
-    while (c--)
-      if (k[c]) p = p.replace(new RegExp('\\b' + e(c) + '\\b', 'g'), k[c]);
-    return p
-  }('z.A();9 j(a){5(a.B(\'f\')!=\'k\'){C D};4 b=a.l;b.2.E=a.F+\'g\';b.2.m=\'G\';5($(\'n\').7-a.h-a.7-b.7<0){b.2.c=a.h-b.7+\'g\';b.o.2.p=\'0 q 0 0\';b.6[1].2.c=\'r\';b.6[1].2.s=\'0\';b.6[1].2.t=\'-u -H\'}I{b.2.c=a.h+a.7+\'g\';b.o.2.p=\'0 0 0 q\';b.6[1].2.s=\'r\';b.6[1].2.c=\'0\';b.6[1].2.t=\'-u -J\'}};4 8=$(\'n\').K(\'8\');L(4 i=0;8[i];i++){8[i].M=9(e){4 e=e||v;4 a=e.w||e.N;5(3.d){5(!(a==3||3.d(a))){3.2.x=\'#O\';3.y(\'f\',\'k\');4 b=3;P(9(){j(b)},Q)}}};8[i].R=9(e){4 e=e||v;4 a=e.w||e.S;5(3.d){5(!3.d(a)){3.y(\'f\',\'T\');3.2.x=\'#U\';4 b=3.l;b.2.m=\'V\'}}}};',
-          58, 58,
-          '||style|this|var|if|childNodes|offsetWidth|li|function|||left|contains||notestate|px|offsetLeft||noteShow|show|lastChild|display|list|firstChild|margin|5px|auto|right|backgroundPosition|98px|event|relatedTarget|background|setAttribute|scrollTop|init|getAttribute|return|false|top|offsetTop|block|79px|else|64px|getElementsByTagName|for|onmouseover|fromElement|f4f4f4|setTimeout|800|onmouseout|toElement|hidden|fff|none'
-                  .split('|'), 0, {}))
-</script>
 </body>
 
 </html>

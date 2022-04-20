@@ -18,4 +18,6 @@ public interface BookService {
     List<Book> getBooksByCategory(String category, int num);
 
     void updateBook(Book book);
+
+    List<Book> getBooksByPage(String category, int state, int num);
 }

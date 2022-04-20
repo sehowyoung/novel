@@ -15,4 +15,6 @@ public interface BookMapper {
     List<Book> selectBooksByCategory(String category, int num);
 
     void updateBook(Book book);
+
+    List<Book> selectBooksByPage(String category, int state, int num1, int num2);
 }

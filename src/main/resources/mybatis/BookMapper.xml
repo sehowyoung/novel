@@ -22,4 +22,26 @@
             limit 0, #{num}
         </if>
     </select>
+    <select id="selectBooksByPage" resultType="Book">
+        SELECT id as bookId, name, description, author, category, updated, cover, hot, status as statusCode, word
+        FROM book
+        <if test="category != null and category != ''">
+            WHERE category = #{category}
+            <if test="state == 2">
+                AND status = 0
+            </if>
+            <if test="state == 1">
+                AND status = 1
+            </if>
+        </if>
+        <if test="category == null or category == ''">
+            <if test="state == 2">
+                WHERE status = 0
+            </if>
+            <if test="state == 1">
+                where status = 1
+            </if>
+        </if>
+        limit #{num1}, #{num2}
+    </select>
 </mapper>

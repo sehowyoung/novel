@@ -29,6 +29,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public List<Book> getBooksByPage(String category, int state, int num) {
+        return bookMapper.selectBooksByPage(category, state, (num - 1) * 12, 12);
+    }
+
+    @Override
     public void updateBook(Book book) {
         bookMapper.updateBook(book);
     }

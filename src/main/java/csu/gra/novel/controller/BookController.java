@@ -2,12 +2,16 @@ package csu.gra.novel.controller;
 
 import csu.gra.novel.domain.Book;
 import csu.gra.novel.service.BookService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,14 +45,25 @@ public class BookController {
         category.put("历史小说", history);
         category.put("网游小说", games);
 
-//        model.addAttribute("fantasies", fantasies);
-//        model.addAttribute("cultivations", cultivations);
-//        model.addAttribute("cities", cities);
-//        model.addAttribute("sciences", sciences);
-//        model.addAttribute("history", history);
-//        model.addAttribute("games", games);
         model.addAttribute("category", category);
         model.addAttribute("recommends", recommends);
         return "index";
+    }
+
+    @GetMapping("book/index")
+    public String getBooksByCategory(@RequestParam(value = "type", required = false) String type,
+                                     @RequestParam(value = "state", required = false, defaultValue = "0") int state,
+                                     @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                                     Model model){
+        System.out.println(state +"\t" + page);
+        List<Book> books = bookService.getBooksByPage(type, state, page);
+        for (Book book : books) {
+            book.setStatus(book.getStatusCode());
+        }
+        model.addAttribute("books", books);
+        model.addAttribute("type", type);
+        model.addAttribute("page", page);
+        model.addAttribute("state", state);
+        return "book/index";
     }
 }

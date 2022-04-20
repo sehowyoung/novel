@@ -16,7 +16,7 @@ import java.util.Map;
  * @email howyoung525@foxmail.com
  */
 @SpringBootTest
-public class BookTest {
+class BookTest {
     @Autowired
     private BookService bookService;
 
@@ -31,6 +31,15 @@ public class BookTest {
                 bookService.updateBook(book);
             }
 //            System.out.println(book.toString());
+        }
+    }
+
+    @Test
+    void test1(){
+        List<Book> books = bookService.getBooksByPage("玄幻小说", 1, 1);
+        for (Book book : books) {
+            book.setStatus(book.getStatusCode());
+            System.out.println(book.toString());
         }
     }
 }
