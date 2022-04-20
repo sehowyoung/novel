@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,13 +33,21 @@ public class BookController {
         List<Book> sciences = bookService.getBooksByCategory("科幻小说", num);
         List<Book> history = bookService.getBooksByCategory("历史小说", num);
         List<Book> games = bookService.getBooksByCategory("网游小说", num);
+        Map<String, List<Book>> category = new HashMap<>(6);
+        category.put("玄幻小说", fantasies);
+        category.put("修真小说", cultivations);
+        category.put("都市小说", cities);
+        category.put("科幻小说", sciences);
+        category.put("历史小说", history);
+        category.put("网游小说", games);
 
-        model.addAttribute("fantasies", fantasies);
-        model.addAttribute("cultivations", cultivations);
-        model.addAttribute("cities", cities);
-        model.addAttribute("sciences", sciences);
-        model.addAttribute("history", history);
-        model.addAttribute("games", games);
+//        model.addAttribute("fantasies", fantasies);
+//        model.addAttribute("cultivations", cultivations);
+//        model.addAttribute("cities", cities);
+//        model.addAttribute("sciences", sciences);
+//        model.addAttribute("history", history);
+//        model.addAttribute("games", games);
+        model.addAttribute("category", category);
         model.addAttribute("recommends", recommends);
         return "index";
     }

@@ -224,7 +224,6 @@
   <a href="/book/index.php">小说</a>
   <a href="/top/index.php">榜单</a>
   <a href="/favorite/index.php">书架</a>
-<!--  <a id="m" href="https://m.hetushu.com/index.php">手机阅读</a>-->
 </div>
 <div class="body" id="body">
   <dl class="recommand">
@@ -246,203 +245,26 @@
   </dl>
   <div id="hetu97"></div>
   <dl class="cbox">
-    <dd class="catalog">
+    <dd class="catalog" th:each="entry:${category}">
       <dl>
-        <dt><a href="/book/index?type=%E7%8E%84%E5%B9%BB%E5%B0%8F%E8%AF%B4">玄幻小说</a></dt>
+        <dt><a th:href="@{/book/index.html(type=${entry.key})}" th:text="${entry.key}"></a></dt>
         <dd class="top">
-          <a th:href="'/book/' + ${fantasies[0].bookId} + '/index.html'" th:title="${fantasies[0].name}">
-            <img th:src="${fantasies[0].cover}" th:lt="${fantasies[0].name}" /></a>
+          <a th:href="@{/book/{id}(id=${entry.value[0].bookId})}" th:title="${entry.value[0].name}">
+            <img th:src="${entry.value[0].cover}" th:alt="${entry.value[0].name}">
+          </a>
           <div>
-            <h3><a th:href="'/book/' + ${fantasies[0].bookId} + '/index.html'" th:title="${fantasies[0].name}" th:text="${fantasies[0].name}"></a></h3>
-            <div class="intro" th:text="${fantasies[0].description}"></div>
+            <h3>
+              <a th:href="@{/book/{id}(id=${entry.value[0].bookId})}" th:title="${entry.value[0].name}" th:text="${entry.value[0].name}"></a>
+            </h3>
+            <div class="intro" th:text="${entry.value[0].description}"></div>
           </div>
         </dd>
         <dd>
           <ul class="list">
-            <li th:each="book, iterStat:${fantasies}">
+            <li th:each="book:${entry.value}">
               <a th:href="@{/book/{id}(id=${book.bookId})}" th:title="${book.name} + '/' + ${book.author}" th:text="${book.name}"></a>
-              <span th:if="!${iterStat.first}" th:text="'/' + ${book.author}"></span>
+              <span th:text="'/' + ${book.author}"></span>
             </li>
-          </ul>
-        </dd>
-      </dl>
-    </dd>
-    <dd class="catalog">
-      <dl>
-        <dt><a href="/book/index.php?type=%E4%BB%99%E4%BE%A0%E5%B0%8F%E8%AF%B4">仙侠小说</a></dt>
-        <dd class="top"><a href="/book/4313/index.html" title="人渣反派自救系统"><img
-                src="/book/cover.pic/cover_4313.jpg" alt="人渣反派自救系统" /></a>
-          <div>
-            <h3><a href="/book/4313/index.html" title="人渣反派自救系统">人渣反派自救系统</a></h3>
-            <div class="intro">身为《狂傲仙魔途》的资深读者，沈垣对这篇文是大大的不满。
-              “傻逼作者傻逼文！”临终前他骂了这么一句，于是──
-              【启动码：傻逼作者傻逼文。自动触发系统。】
-              他重生到一本自己刚读完还嫌弃过的暗黑系种马小说了！
-              而且天杀的，他的角色还是男主角那位人渣反派师尊沈清秋！
-              说到沈清秋，虽然有外表、有修为，但为人还真是格外没品。
-              欺负打压男主角不说，还残害同门，道貌岸然，内心淫邪……
-              这样一个坏到天怒人怨的角色，在原著里的下场当然是凄惨的，
-              男主角洛冰河最后会把他削成人棍啊我的妈，他不想死得这么惨啊！
-              于是乎，新生的沈清秋开始了避免惨死结局的艰苦之路，
-              因为他要保命，但却不能违反各种系统设定！
-              虽然艰辛，但他要趁徒弟还是可爱小绵羊的时候就开始刷好感度，
-              以免后期黑化的洛冰河称霸后，会回来报复自己。
-              只是，沈清秋这好感度可能刷过头了，
-              他没发现洛冰河看他的目光，好像，有那么点不一样了……</div>
-          </div>
-        </dd>
-        <dd>
-          <ul class="list">
-            <li><a href="/book/6139/index.html" title="莫求仙缘/蒙面怪客">莫求仙缘</a><span>/蒙面怪客</span></li>
-            <li><a href="/book/6127/index.html" title="斗米仙缘/能优斯特">斗米仙缘</a><span>/能优斯特</span></li>
-            <li><a href="/book/6126/index.html" title="刀笼/虫梦">刀笼</a><span>/虫梦</span></li>
-            <li><a href="/book/6124/index.html" title="大魏读书人/七月未时">大魏读书人</a><span>/七月未时</span></li>
-            <li><a href="/book/6117/index.html"
-                   title="不能修仙的我只有去培育魂宠了/夏竖琴">不能修仙的我只有去培育魂宠了</a><span>/夏竖琴</span></li>
-            <li><a href="/book/6116/index.html" title="拜师四目道长/东人">拜师四目道长</a><span>/东人</span></li>
-            <li><a href="/book/6017/index.html" title="仙官/随轻风去">仙官</a><span>/随轻风去</span></li>
-            <li><a href="/book/6005/index.html"
-                   title="天庭签到，终于等来大闹天宫/岳不懂">天庭签到，终于等来大闹天宫</a><span>/岳不懂</span></li>
-            <li><a href="/book/6003/index.html" title="太平客栈/莫问江湖">太平客栈</a><span>/莫问江湖</span></li>
-            <li><a href="/book/5990/index.html" title="道长，时代变了/全金属弹壳">道长，时代变了</a><span>/全金属弹壳</span>
-            </li>
-            <li><a href="/book/5985/index.html" title="从杀猪开始修仙/张老西">从杀猪开始修仙</a><span>/张老西</span></li>
-            <li><a href="/book/5981/index.html" title="仙宫/打眼">仙宫</a><span>/打眼</span></li>
-          </ul>
-        </dd>
-      </dl>
-    </dd>
-    <dd class="catalog">
-      <dl>
-        <dt><a href="/book/index.php?type=%E7%BD%91%E6%B8%B8%E5%B0%8F%E8%AF%B4">网游小说</a></dt>
-        <dd class="top"><a href="/book/171/index.html" title="全职高手"><img src="/book/cover.pic/cover_171.jpg"
-                                                                         alt="全职高手" /></a>
-          <div>
-            <h3><a href="/book/171/index.html" title="全职高手">全职高手</a></h3>
-            <div class="intro">
-              网游荣耀中被誉为教科书级别的顶尖高手叶秋（真名：叶修），因为种种原因遭到俱乐部的驱逐，离开职业圈的他寄身于一家网吧成了一个小小的网管，但是，拥有十年游戏经验的他，在荣耀新开的第十区重新投入了游戏，带着对往昔的回忆，和一把未完成的自制武器，开始了重返巅峰之路。
-              勾心斗角之后，谁夺走了我的荣耀，风雨飘摇之下，希望却不曾破灭。花团锦簇之中，没有迷失了方向。万众瞩目之前，我，就在这里回归了！</div>
-          </div>
-        </dd>
-        <dd>
-          <ul class="list">
-            <li><a href="/book/6012/index.html" title="我有一群地球玩家/第七个魔方">我有一群地球玩家</a><span>/第七个魔方</span>
-            </li>
-            <li><a href="/book/5904/index.html" title="斩月/失落叶">斩月</a><span>/失落叶</span></li>
-            <li><a href="/book/5891/index.html" title="世界树的游戏/咯嘣">世界树的游戏</a><span>/咯嘣</span></li>
-            <li><a href="/book/5890/index.html" title="神话三国领主/大汉护卫">神话三国领主</a><span>/大汉护卫</span></li>
-            <li><a href="/book/5837/index.html" title="猎魔烹饪手册/颓废龙">猎魔烹饪手册</a><span>/颓废龙</span></li>
-            <li><a href="/book/5830/index.html" title="法师乔安/程剑心">法师乔安</a><span>/程剑心</span></li>
-            <li><a href="/book/5780/index.html" title="他来自虚空/可能有猫饼">他来自虚空</a><span>/可能有猫饼</span></li>
-            <li><a href="/book/5779/index.html" title="死灵神话/羽民">死灵神话</a><span>/羽民</span></li>
-            <li><a href="/book/5773/index.html" title="亏成首富从游戏开始/青衫取醉">亏成首富从游戏开始</a><span>/青衫取醉</span>
-            </li>
-            <li><a href="/book/5745/index.html" title="我的混沌城/凌虚月影">我的混沌城</a><span>/凌虚月影</span></li>
-            <li><a href="/book/5726/index.html" title="法爷永远是你大爷/翔炎">法爷永远是你大爷</a><span>/翔炎</span></li>
-            <li><a href="/book/5725/index.html" title="都市的变形德鲁伊/易伤秋者">都市的变形德鲁伊</a><span>/易伤秋者</span>
-            </li>
-          </ul>
-        </dd>
-      </dl>
-    </dd>
-    <dd class="catalog">
-      <dl>
-        <dt><a href="/book/index.php?type=%E7%A9%BF%E8%B6%8A%E5%B0%8F%E8%AF%B4">穿越小说</a></dt>
-        <dd class="top"><a href="/book/1311/index.html" title="国医高手"><img
-                src="/book/cover.pic/cover_1311.jpg" alt="国医高手" /></a>
-          <div>
-            <h3><a href="/book/1311/index.html" title="国医高手">国医高手</a></h3>
-            <div class="intro">本书原名《医道官途》，出版时改名为《国医高手》。
-              几乎所有人都知道隋末第一条好汉是李元霸，却没几个知道隋末第一圣手是张一针。
-              张一针不是个英雄，虽然医术高超，可是从来不做没有回报的事情,张一针治好的富人多，基本上都是给了银子的，张一针治好的女人多，对于这种不良医生野史都羞于记载。
-              张一针死的很惨，武功已臻化境的他先是喝下隋炀帝的毒酒，然后被一名御林军乱箭攒心,起因却是他不计报酬的救活了隋炀帝难产的贵妃，所以他很感到很冤枉，做好事救了母子两条命，竟然落到这个结局，真是千古奇冤。
-              后世科学证明，怨气的能量可以穿越时空，是为怨气冲天，所以张一针同志也成为千百万穿越众中的一员，很幸运的穿越了。</div>
-          </div>
-        </dd>
-        <dd>
-          <ul class="list">
-            <li><a href="/book/5888/index.html" title="能穿越的我该怎么浪/末羽">能穿越的我该怎么浪</a><span>/末羽</span></li>
-            <li><a href="/book/5693/index.html" title="我真的不是气运之子/云中殿">我真的不是气运之子</a><span>/云中殿</span>
-            </li>
-            <li><a href="/book/5670/index.html" title="全球战国/混吃等死">全球战国</a><span>/混吃等死</span></li>
-            <li><a href="/book/5488/index.html" title="红楼名侦探/嗷世巅锋">红楼名侦探</a><span>/嗷世巅锋</span></li>
-            <li><a href="/book/5182/index.html" title="乘龙佳婿/府天">乘龙佳婿</a><span>/府天</span></li>
-            <li><a href="/book/5088/index.html" title="城姬三国/绅士东">城姬三国</a><span>/绅士东</span></li>
-            <li><a href="/book/4494/index.html" title="幻想世界大穿越/辰一十一">幻想世界大穿越</a><span>/辰一十一</span></li>
-            <li><a href="/book/4326/index.html" title="穿越时空再续情缘/枫之幻想">穿越时空再续情缘</a><span>/枫之幻想</span>
-            </li>
-            <li><a href="/book/4049/index.html" title="心意萌龙/扣子依依">心意萌龙</a><span>/扣子依依</span></li>
-            <li><a href="/book/3927/index.html" title="穿越与反穿越/妖舟">穿越与反穿越</a><span>/妖舟</span></li>
-            <li><a href="/book/3876/index.html" title="秀丽江山4·朱雀卷/李歆">秀丽江山4·朱雀卷</a><span>/李歆</span></li>
-            <li><a href="/book/3875/index.html" title="秀丽江山3·玄武卷/李歆">秀丽江山3·玄武卷</a><span>/李歆</span></li>
-          </ul>
-        </dd>
-      </dl>
-    </dd>
-    <dd class="catalog">
-      <dl>
-        <dt><a href="/book/index.php?type=%E9%83%BD%E5%B8%82%E5%B0%8F%E8%AF%B4">都市小说</a></dt>
-        <dd class="top"><a href="/book/970/index.html" title="问鼎"><img src="/book/cover.pic/cover_970.jpg"
-                                                                       alt="问鼎" /></a>
-          <div>
-            <h3><a href="/book/970/index.html" title="问鼎">问鼎</a></h3>
-            <div class="intro">《问鼎》是何常在所著一部官场类小说，连载时原名《官神》，现改名为《问鼎》集结出版。
-              为官者达到举重若轻、点石成金、出神入化的境界，是为官神。
-              慧眼看红尘，做官如有神。
-              重生的夏想站在大学毕业的路口，回味错过的人生，珍惜眼前的时机，他要自己规划自己的人生，从县委书记秘书起步，官运亨通，步步高升，跑步进入了官场。
-              免责声明：如果与现实有雷同之处，可以理解为绝对巧合，也可以理解为是平行空间的影射，请勿对号入座。</div>
-          </div>
-        </dd>
-        <dd>
-          <ul class="list">
-            <li><a href="/book/6140/index.html" title="你有科学，我有神功/欢颜笑语">你有科学，我有神功</a><span>/欢颜笑语</span>
-            </li>
-            <li><a href="/book/6137/index.html" title="离婚后前妻成了债主/啊欢">离婚后前妻成了债主</a><span>/啊欢</span></li>
-            <li><a href="/book/6136/index.html" title="老兵新警/卓牧闲">老兵新警</a><span>/卓牧闲</span></li>
-            <li><a href="/book/6135/index.html" title="开局站在人生巅峰/月沧狼">开局站在人生巅峰</a><span>/月沧狼</span></li>
-            <li><a href="/book/6125/index.html" title="带着医院回80年/烤饺">带着医院回80年</a><span>/烤饺</span></li>
-            <li><a href="/book/6023/index.html" title="重生之苍莽人生/velver">重生之苍莽人生</a><span>/velver</span>
-            </li>
-            <li><a href="/book/6021/index.html" title="硬核厨爸/旁墨">硬核厨爸</a><span>/旁墨</span></li>
-            <li><a href="/book/6013/index.html" title="我有一座野生动物园/可口的橘子">我有一座野生动物园</a><span>/可口的橘子</span>
-            </li>
-            <li><a href="/book/6010/index.html" title="我老婆是传奇天后/南国月三更">我老婆是传奇天后</a><span>/南国月三更</span>
-            </li>
-            <li><a href="/book/6006/index.html" title="土味巨星/旋转蘑菇木偶">土味巨星</a><span>/旋转蘑菇木偶</span></li>
-            <li><a href="/book/6004/index.html" title="腾飞我的航空时代/安溪柚">腾飞我的航空时代</a><span>/安溪柚</span></li>
-            <li><a href="/book/6002/index.html" title="首富从谈恋爱开始/王戈多">首富从谈恋爱开始</a><span>/王戈多</span></li>
-          </ul>
-        </dd>
-      </dl>
-    </dd>
-    <dd class="catalog">
-      <dl>
-        <dt><a href="/book/index.php?type=%E7%A7%91%E5%B9%BB%E5%B0%8F%E8%AF%B4">科幻小说</a></dt>
-        <dd class="top"><a href="/book/15/index.html" title="吞噬星空"><img src="/book/cover.pic/cover_15.jpg"
-                                                                        alt="吞噬星空" /></a>
-          <div>
-            <h3><a href="/book/15/index.html" title="吞噬星空">吞噬星空</a></h3>
-            <div class="intro">
-              “这颗星球，通体土黄色，没有任何生命存在，直径21000公里，咦，竟然蕴含“星泪金”矿脉，真是天助我也，将这颗星球吞噬掉后，我的实力应该能恢复到受伤前的80%。”脸色苍白的罗峰盘膝坐在一颗飞行的陨石上，遥看远处的一颗无生命存在的行星。
-              番茄第六部小说《吞噬星空》，将为读者展现出一个浩瀚广阔，神秘莫测的未来世界。</div>
-          </div>
-        </dd>
-        <dd>
-          <ul class="list">
-            <li><a href="/book/6133/index.html" title="九星之主/育">九星之主</a><span>/育</span></li>
-            <li><a href="/book/6132/index.html" title="火力法则/如水意">火力法则</a><span>/如水意</span></li>
-            <li><a href="/book/6130/index.html" title="哈迪帝国1945/昨夜大雨">哈迪帝国1945</a><span>/昨夜大雨</span>
-            </li>
-            <li><a href="/book/6018/index.html" title="星球建造师/火洞">星球建造师</a><span>/火洞</span></li>
-            <li><a href="/book/6016/index.html" title="戏精的诞生/燃冷光">戏精的诞生</a><span>/燃冷光</span></li>
-            <li><a href="/book/6011/index.html" title="我能赋予万物本源/落花独立">我能赋予万物本源</a><span>/落花独立</span>
-            </li>
-            <li><a href="/book/6009/index.html" title="我不是至高神/黑山青狐">我不是至高神</a><span>/黑山青狐</span></li>
-            <li><a href="/book/5999/index.html" title="全球神祇时代/一夕成道">全球神祇时代</a><span>/一夕成道</span></li>
-            <li><a href="/book/5982/index.html" title="超级母舰/空长青">超级母舰</a><span>/空长青</span></li>
-            <li><a href="/book/5908/index.html" title="诸天最强大佬/七只跳蚤">诸天最强大佬</a><span>/七只跳蚤</span></li>
-            <li><a href="/book/5896/index.html" title="我能升级避难所/十七筝">我能升级避难所</a><span>/十七筝</span></li>
-            <li><a href="/book/5886/index.html" title="纳米崛起/岭南仨人">纳米崛起</a><span>/岭南仨人</span></li>
           </ul>
         </dd>
       </dl>
@@ -454,11 +276,5 @@
 <div class="foot">
   网站简介 | 商务合作 | 版权声明 | 联系我们 | 网站地图<p>Copyright&nbsp;@&nbsp;2022&nbsp;&nbsp;All Rights Reserved.</p>
 </div>
-<!--<script type="text/javascript">-->
-<!--  //<![CDATA[-->
-<!--  scrollTop.init();-->
-<!--  //]]>-->
-<!--</script>-->
 </body>
-
 </html>

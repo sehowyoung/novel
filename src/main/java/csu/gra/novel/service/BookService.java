@@ -16,4 +16,6 @@ public interface BookService {
     List<Book> getRecommendBooks(int num);
 
     List<Book> getBooksByCategory(String category, int num);
+
+    void updateBook(Book book);
 }

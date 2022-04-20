@@ -22,9 +22,15 @@ public class BookTest {
 
     @Test
     void test(){
-        List<Book> books = bookService.getBooksByCategory("都市小说", 13);
+        List<Book> books = bookService.getRecommendBooks(0);
         for (Book book : books) {
-            System.out.println(book.toString());
+            String cover = book.getCover();
+            if (cover.contains("doc/topList")){
+                cover = cover.replace("doc/topList", "/images");
+                book.setCover(cover);
+                bookService.updateBook(book);
+            }
+//            System.out.println(book.toString());
         }
     }
 }

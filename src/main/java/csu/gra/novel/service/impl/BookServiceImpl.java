@@ -27,4 +27,9 @@ public class BookServiceImpl implements BookService {
     public List<Book> getBooksByCategory(String category, int num){
         return bookMapper.selectBooksByCategory(category, num);
     }
+
+    @Override
+    public void updateBook(Book book) {
+        bookMapper.updateBook(book);
+    }
 }
