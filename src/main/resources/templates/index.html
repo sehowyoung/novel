@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="zh-Hans" xmlns="http://www.thymeleaf.org">
+<html lang="zh-Hans" xmlns:th="https://www.thymeleaf.org">
 
 <head>
   <meta charset="utf-8" />
@@ -152,52 +152,6 @@
       color: #bbb;
     }
 
-    .new {
-      font-size: 15px;
-    }
-
-    .new li {
-      padding: 10px 20px;
-      border-bottom: 1px solid #e6e6e6;
-      position: relative;
-    }
-
-    .new li.nhead {
-      text-align: center;
-      background: url(images/line.gif) repeat-x center;
-      border: 0;
-      padding: 0;
-      margin: 20px 0 10px;
-    }
-
-    .new li.nhead span {
-      background: #fff;
-      font-size: 24px;
-      color: #189e71;
-      border-right: 2px solid #189e71;
-      border-left: 2px solid #189e71;
-      padding: 0 10px;
-    }
-
-    .new li .author {
-      position: absolute;
-      right: 0;
-    }
-
-    .new li .author a {
-      color: #bbb;
-    }
-
-    .new li .bname {
-      display: inline-block;
-      width: 460px;
-      margin-left: 5px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      vertical-align: bottom;
-    }
-
     .link {
       padding: 20px;
     }
@@ -210,21 +164,7 @@
 </head>
 
 <body>
-<div class="head">
-  <span id="title">畅读阁</span>
-  <form id="form1" method="get" action="/book/search" target="_blank">
-    <div id="search_box">
-      <input type="text" id="keyword" name="keyword" placeholder="请输入搜索内容..." />
-      <button id="search_b" type="submit">搜索</button>
-    </div>
-  </form>
-</div>
-<div class="menu">
-  <a href="/index">首页</a>
-  <a href="/book/index.php">小说</a>
-  <a href="/top/index.php">榜单</a>
-  <a href="/favorite/index.php">书架</a>
-</div>
+<div th:include="common/header :: header"></div>
 <div class="body" id="body">
   <dl class="recommand">
     <dt><span>推荐小说</span></dt>

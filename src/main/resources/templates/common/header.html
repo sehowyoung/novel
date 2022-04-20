@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" xmlns:th="https://www.thymeleaf.org">
+<body>
+    <div th:fragment="header">
+        <div class="head">
+            <span id="title">畅读阁</span>
+            <form id="form1" method="get" action="/book/search" target="_blank">
+                <div id="search_box">
+                    <input type="text" id="keyword" name="keyword" placeholder="请输入搜索内容..." />
+                    <button id="search_b" type="submit">搜索</button>
+                </div>
+            </form>
+        </div>
+        <div class="menu">
+            <a href="/index">首页</a>
+            <a href="/book/index.php">小说</a>
+            <a href="/top/index.php">榜单</a>
+            <a href="/favorite/index.php">书架</a>
+        </div>
+    </div>
+</body>
+</html>
