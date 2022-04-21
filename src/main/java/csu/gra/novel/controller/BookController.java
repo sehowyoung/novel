@@ -69,9 +69,7 @@ public class BookController {
     @GetMapping("book/{id}")
     public String getBookDetails(@PathVariable int id, Model model) {
         Book book = bookService.getBookById(id);
-//        List<Book> top = bookService.getTopList(3);
         model.addAttribute("book", book);
-//        model.addAttribute("top", top);
         return "book/book";
     }
 
@@ -82,15 +80,12 @@ public class BookController {
             List<Chapter> list = book.getChapters();
             int index = book.getBookByChapterId(chapterId);
             Chapter chapter = list.get(index);
-//            System.out.println(chapter.toString());
             chapter.setCons(chapter.getContent());
             Chapter next = new Chapter();
             Chapter pre = new Chapter();
-//            System.out.println(index);
             if (index > 0){
                 pre = list.get(index - 1);
             }
-//            System.out.println(pre.toString());
             if (index != list.size() - 1){
                 next = list.get(index + 1);
             }
@@ -102,5 +97,12 @@ public class BookController {
             System.out.println("huo qu shi bai");
         }
         return "book/chapter";
+    }
+
+    @GetMapping("/top/index")
+    public String getTopList(Model model){
+        List<Book> topList = bookService.getTopList(0);
+        model.addAttribute("topList", topList);
+        return "top/index";
     }
 }

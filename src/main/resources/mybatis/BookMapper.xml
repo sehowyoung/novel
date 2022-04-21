@@ -52,7 +52,7 @@
         SELECT id, bookid AS bookId, name, content FROM chapter WHERE bookid = #{bookId}
     </select>
     <select id="getTopList" resultType="csu.gra.novel.domain.Book">
-        SELECT id as bookId, name, description, author, category, updated, cover, hot, status as statusCode, word
+        SELECT book.id as bookId, name, description, author, category, updated, cover, hot, status as statusCode, word
         FROM book , top
         WHERE book.id = top.bookId
         <if test="num != 0">
