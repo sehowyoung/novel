@@ -1,11 +1,13 @@
 package csu.gra.novel;
 
 import csu.gra.novel.domain.Book;
+import csu.gra.novel.domain.Chapter;
 import csu.gra.novel.service.BookService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
@@ -36,10 +38,12 @@ class BookTest {
 
     @Test
     void test1(){
-        List<Book> books = bookService.getBooksByPage("玄幻小说", 1, 1);
-        for (Book book : books) {
-            book.setStatus(book.getStatusCode());
-            System.out.println(book.toString());
+        Book book = bookService.getBookById(25);
+        List<Chapter> chapters = book.getChapters();
+        Chapter chapter = chapters.get(0);
+        chapter.setCons(chapter.getContent());
+        for (int i = 0; i < chapter.getCons().size(); i++) {
+            System.out.println(chapter.getCons().get(i));
         }
     }
 }

@@ -20,4 +20,8 @@ public interface BookService {
     void updateBook(Book book);
 
     List<Book> getBooksByPage(String category, int state, int num);
+
+    Book getBookById(int id);
+
+    List<Book> getTopList(int num);
 }

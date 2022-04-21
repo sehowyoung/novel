@@ -9,6 +9,7 @@ import java.util.ArrayList;
  * @author howyoung
  */
 @Data
+//@Component
 public class User {
     private int userId;
     private String username;

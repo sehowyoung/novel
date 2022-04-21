@@ -1,0 +1,393 @@
+@charset "utf-8";
+
+.button {
+    border: 1px solid #d4d4d4;
+    padding: 10px;
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+.body .title {
+    margin-bottom: 20px;
+}
+
+#right {
+    float: right;
+    width: 300px;
+    position: relative;
+}
+
+#left {
+    margin-right: 340px;
+    font-size: 16px;
+}
+
+.book_info img {
+    float: left;
+    margin-right: 25px;
+    height: 150px;
+    width: 120px;
+}
+
+.book_info>div {
+    margin: 8px 0;
+    margin-left: 145px;
+}
+
+.book_info .intro {
+    line-height: 1.8em;
+    text-indent: 2em;
+    max-height: 310px;
+    overflow: hidden;
+    position: relative;
+    transition: max-height .2s;
+}
+
+.book_info .intro .more {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30%;
+    background: -webkit-linear-gradient(to top, #fff 1.6em, rgba(255, 255, 255, 0.5) 80%, rgba(255, 255, 255, 0.2));
+    background: linear-gradient(to top, #fff 1.6em, rgba(255, 255, 255, 0.5) 80%, rgba(255, 255, 255, 0.2));
+    text-align: center;
+    text-indent: 0;
+    color: #1bb582;
+    font-size: 0.9em;
+    pointer-events: none;
+}
+
+.book_info .intro .more div {
+    cursor: pointer;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 5px 0;
+    pointer-events: auto;
+}
+
+.book_info .intro .more div:after {
+    content: "更多內容";
+    background: url(/images/list.png) no-repeat right -1282px;
+    display: inline-block;
+    padding-right: 20px;
+    line-height: 1.6em;
+}
+
+.book_info .nav {
+    margin-top: 10px;
+    overflow: hidden;
+    zoom: 1;
+}
+
+.nav .button {
+    border-radius: 4px;
+    float: left;
+    cursor: pointer;
+}
+
+.nav .button:hover {
+    border: 1px solid #bbb;
+}
+
+.nav .fb-like {
+    margin: 7px 0;
+}
+
+.nav .sharebox24 {
+    margin: 8px 0;
+}
+
+.dir_title {
+    margin: 20px 0 10px;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.dir_title span {
+    padding: 0 2px;
+    border-bottom: 2px solid #189e71;
+    background: url(/images/hetu.png) no-repeat 31px 27px;
+    height: 30px;
+    line-height: 30px;
+    display: inline-block;
+    margin-bottom: -1px;
+    font-size: 16px;
+    margin-left: 1em;
+}
+
+#dir {
+    overflow: hidden;
+    margin-bottom: 20px;
+    zoom: 1;
+    font-size: 16px;
+}
+
+#dir dd,
+#dir dt {
+    text-indent: 38px;
+    border-bottom: 1px dotted #e6e6e6;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 8px 0;
+}
+
+#dir dd {
+    float: left;
+    width: 49.9%;
+}
+
+#dir dt {
+    clear: both;
+    font-weight: bold;
+    padding: 10px 0;
+    text-indent: 24px;
+}
+
+#dir dt:before {
+    content: '';
+    display: inline-block;
+    border-right: 6px solid #189e71;
+    height: 22px;
+    margin-right: 8px;
+    vertical-align: bottom;
+    text-indent: 0;
+    border-radius: 3px;
+}
+
+.top {
+    border-bottom: 1px dotted #e6e6e6;
+    zoom: 1;
+}
+
+.top dd {
+    overflow: hidden;
+    margin: 12px 0;
+    position: relative;
+    zoom: 1;
+}
+
+.tag {
+    border-bottom: 1px dotted #e6e6e6;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+.tag a {
+    margin: 0 10px 10px 0;
+}
+
+.tag a:hover {
+    background-color: #406080;
+    color: #FFF;
+}
+
+.tag dt {
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.top dt {
+    font-weight: bold;
+}
+
+.top dd img {
+    width: 62px;
+    height: 82px;
+    float: left;
+    margin-right: 10px;
+    border: 1px solid #e6e6e6;
+}
+
+.top dd .list-num,
+.top dd .list-num2 {
+    width: 15px;
+    height: 15px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 15px;
+}
+
+.top dd .list-num {
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    background: #3ac196;
+    color: #fff;
+}
+
+.top dd .list-num2 {
+    background: #ebebeb;
+    color: #a8a8a8;
+    display: inline-block;
+    margin-right: 8px;
+    vertical-align: text-top;
+}
+
+.top dd .name {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.top dd .author {
+    font-size: 12px;
+    color: #666;
+}
+
+[lang="zh-Hant"] div.continue {
+    background: url(/images/continue_tc.gif) no-repeat top right
+}
+
+[lang="zh-Hant"] div.finish {
+    background: url(/images/finish_tc.gif) no-repeat top right;
+}
+
+[lang="zh-Hans"] div.continue {
+    background: url(/images/continue_cn.gif) no-repeat top right
+}
+
+[lang="zh-Hans"] div.finish {
+    background: url(/images/finish_cn.gif) no-repeat top right;
+}
+
+.ad {
+    margin-bottom: 20px;
+}
+
+.book_info .history {
+    color: #93a1a1;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 14px;
+}
+
+.book_info .history a {
+    font-weight: bold;
+    color: #1bb582;
+}
+
+.floatbox {
+    position: fixed;
+    bottom: 20px;
+    padding-top: 20px;
+    z-index: 999;
+    width: 298px;
+    overflow: hidden;
+    background: url(/images/list.png) no-repeat 0 -446px;
+    visibility: hidden;
+}
+
+.sdirbutton {
+    width: 50px;
+    height: 50px;
+    background: #fff url(/images/hetu.png) no-repeat 0 -155px;
+    cursor: pointer;
+    z-index: 1;
+    margin: 5px 0 5px 4px;
+}
+
+.scrolltop2 {
+    position: relative;
+    display: block;
+    bottom: auto;
+    margin-left: 4px;
+}
+
+.sdirbox {
+    height: 333px;
+    z-index: 1;
+    width: 296px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.sdirbody {
+    position: absolute;
+    top: 0;
+    width: 264px;
+}
+
+.arrow {
+    position: absolute;
+    width: 18px;
+    height: 12px;
+    left: 3px;
+    top: 0;
+    background: url(/images/list.png) no-repeat 0 -428px;
+}
+
+.sdirbox li {
+    line-height: 2;
+    text-indent: 25px;
+    padding: 1px 0;
+    background: url(/images/list.png) no-repeat 0 -378px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sdirbox li:hover {
+    background-position: 0 -398px;
+}
+
+#top {
+    margin-bottom: 20px;
+}
+
+.scrollbar {
+    width: 22px;
+    height: 51px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    position: absolute;
+    top: 151px;
+    right: 5px;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+.arrowbox {
+    width: 22px;
+    height: 25px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.arrowbox b {
+    display: inline-block;
+    border: 6px solid #fff;
+    width: 0;
+    height: 0;
+    font-size: 0;
+    line-height: 0;
+    margin: 2px 0 0 5px;
+}
+
+.arrowbox b.upnull {
+    border-bottom-color: #ccc;
+}
+
+.arrowbox b.up {
+    border-bottom-color: #666;
+}
+
+.arrowbox b.downnull {
+    margin-top: 10px;
+    border-top-color: #ccc;
+}
+
+.arrowbox b.down {
+    margin-top: 10px;
+    border-top-color: #666;
+}
+
+#hetu30 {
+    height: 300px;
+    border-top: 1px dotted #e6e6e6;
+    margin-top: 10px;
+}

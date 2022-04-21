@@ -44,4 +44,19 @@
         </if>
         limit #{num1}, #{num2}
     </select>
+    <select id="getBookById" resultType="csu.gra.novel.domain.Book">
+        SELECT id as bookId, name, description, author, category, updated, cover, hot, status as statusCode, word
+        FROM book WHERE id = #{id}
+    </select>
+    <select id="getChaptersByBookId" resultType="csu.gra.novel.domain.Chapter">
+        SELECT id, bookid AS bookId, name, content FROM chapter WHERE bookid = #{bookId}
+    </select>
+    <select id="getTopList" resultType="csu.gra.novel.domain.Book">
+        SELECT id as bookId, name, description, author, category, updated, cover, hot, status as statusCode, word
+        FROM book , top
+        WHERE book.id = top.bookId
+        <if test="num != 0">
+            limit 0, #{num}
+        </if>
+    </select>
 </mapper>

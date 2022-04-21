@@ -1,8 +1,8 @@
 package csu.gra.novel.controller;
 
 import csu.gra.novel.domain.Book;
+import csu.gra.novel.domain.Chapter;
 import csu.gra.novel.service.BookService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,5 +64,43 @@ public class BookController {
         model.addAttribute("page", page);
         model.addAttribute("state", state);
         return "book/index";
+    }
+
+    @GetMapping("book/{id}")
+    public String getBookDetails(@PathVariable int id, Model model) {
+        Book book = bookService.getBookById(id);
+//        List<Book> top = bookService.getTopList(3);
+        model.addAttribute("book", book);
+//        model.addAttribute("top", top);
+        return "book/book";
+    }
+
+    @GetMapping("/book/{bookId}/{chapterId}")
+    public String getChapter(@PathVariable int bookId, @PathVariable int chapterId, Model model){
+        Book book = bookService.getBookById(bookId);
+        if (book != null){
+            List<Chapter> list = book.getChapters();
+            int index = book.getBookByChapterId(chapterId);
+            Chapter chapter = list.get(index);
+//            System.out.println(chapter.toString());
+            chapter.setCons(chapter.getContent());
+            Chapter next = new Chapter();
+            Chapter pre = new Chapter();
+//            System.out.println(index);
+            if (index > 0){
+                pre = list.get(index - 1);
+            }
+//            System.out.println(pre.toString());
+            if (index != list.size() - 1){
+                next = list.get(index + 1);
+            }
+            model.addAttribute("book", book);
+            model.addAttribute("chapter", chapter);
+            model.addAttribute("next", next);
+            model.addAttribute("pre", pre);
+        } else {
+            System.out.println("huo qu shi bai");
+        }
+        return "book/chapter";
     }
 }

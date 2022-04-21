@@ -3,7 +3,7 @@ package csu.gra.novel.domain;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author howyoung
@@ -22,7 +22,7 @@ public class Book {
     private int statusCode;
     private String status;
     private String word;
-    private ArrayList<Chapter> chapters;
+    private List<Chapter> chapters;
 
     public void setStatus(int statusCode){
         if (statusCode == 1){
@@ -30,5 +30,14 @@ public class Book {
         } else if (statusCode == 0){
             status = "已完结";
         }
+    }
+
+    public int getBookByChapterId(int chapterId){
+        for (Chapter chapter : chapters){
+            if (chapter.getId() == chapterId){
+                return chapters.indexOf(chapter);
+            }
+        }
+        return -1;
     }
 }

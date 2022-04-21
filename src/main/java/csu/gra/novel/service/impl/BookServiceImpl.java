@@ -1,6 +1,7 @@
 package csu.gra.novel.service.impl;
 
 import csu.gra.novel.domain.Book;
+import csu.gra.novel.domain.Chapter;
 import csu.gra.novel.mapper.BookMapper;
 import csu.gra.novel.service.BookService;
 import org.mybatis.spring.annotation.MapperScan;
@@ -29,6 +30,22 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public Book getBookById(int id) {
+        Book book = bookMapper.getBookById(id);
+        book.setStatus(book.getStatusCode());
+        List<Chapter> chapters = bookMapper.getChaptersByBookId(id);
+        for (Chapter chapter : chapters) {
+            String name = chapter.getName();
+            int index1 = name.indexOf('.');
+            int index2 = name.indexOf(".txt");
+            name = name.substring(index1 + 1, index2);
+            chapter.setName(name);
+        }
+        book.setChapters(chapters);
+        return book;
+    }
+
+    @Override
     public List<Book> getBooksByPage(String category, int state, int num) {
         return bookMapper.selectBooksByPage(category, state, (num - 1) * 12, 12);
     }
@@ -36,5 +53,10 @@ public class BookServiceImpl implements BookService {
     @Override
     public void updateBook(Book book) {
         bookMapper.updateBook(book);
+    }
+
+    @Override
+    public List<Book> getTopList(int num) {
+        return bookMapper.getTopList(num);
     }
 }

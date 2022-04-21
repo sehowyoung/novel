@@ -1,6 +1,7 @@
 package csu.gra.novel.mapper;
 
 import csu.gra.novel.domain.Book;
+import csu.gra.novel.domain.Chapter;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,4 +18,10 @@ public interface BookMapper {
     void updateBook(Book book);
 
     List<Book> selectBooksByPage(String category, int state, int num1, int num2);
+
+    Book getBookById(int id);
+
+    List<Chapter> getChaptersByBookId(int id);
+
+    List<Book> getTopList(int num);
 }
