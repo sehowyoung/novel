@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -104,5 +105,24 @@ public class BookController {
         List<Book> topList = bookService.getTopList(0);
         model.addAttribute("topList", topList);
         return "top/index";
+    }
+
+    @GetMapping("/book/search")
+    public String searchBook(Model model, @RequestParam String keyword){
+        List<Book> books = new ArrayList<>();
+        if (keyword != null && !("").equals(keyword)){
+            books = bookService.getBookByKeyword(keyword);
+        }
+        model.addAttribute("books", books);
+        model.addAttribute("keyword", keyword);
+        return "book/search";
+    }
+
+    @GetMapping("/author/{author}")
+    public String getBooksByAuthor(Model model, @PathVariable String author){
+        List<Book> books = bookService.getBooksByAuthor("'" + author + "'");
+        model.addAttribute("books", books);
+        model.addAttribute("author", author);
+        return "/user/author";
     }
 }

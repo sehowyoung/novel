@@ -59,4 +59,14 @@
             limit 0, #{num}
         </if>
     </select>
+    <select id="getBookByKeyword" resultType="csu.gra.novel.domain.Book">
+        SELECT id as bookId, name, description, author, category, updated, cover, hot, status as statusCode, word
+        FROM book
+        WHERE name like CONCAT('%', #{keyword}, '%')
+    </select>
+    <select id="getBooksByAuthor" resultType="csu.gra.novel.domain.Book">
+        SELECT id as bookId, name, description, author, category, updated, cover, hot, status as statusCode, word
+        FROM book
+        WHERE author = ${author}
+    </select>
 </mapper>

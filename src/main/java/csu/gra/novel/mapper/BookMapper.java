@@ -24,4 +24,8 @@ public interface BookMapper {
     List<Chapter> getChaptersByBookId(int id);
 
     List<Book> getTopList(int num);
+
+    List<Book> getBookByKeyword(String keyword);
+
+    List<Book> getBooksByAuthor(String author);
 }

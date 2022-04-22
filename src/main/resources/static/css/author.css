@@ -1,0 +1,37 @@
+@charset "utf-8";
+
+.author_box {
+    height: 216px;
+    background: url(/images/author_bg.jpg);
+    overflow: hidden;
+}
+
+.author_info {
+    width: 960px;
+    margin: 35px auto 0;
+    overflow: hidden;
+    height: 154px;
+}
+
+.author_info h4 {
+    font-weight: normal;
+    font-size: 36px;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+#ad {
+    margin: 20px 0;
+}
+
+.list {
+    margin-top: 30px;
+}
+
+.list {
+    margin-bottom: 20px;
+}
+
+.list dt {
+    padding: 2px 0;
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="Copyright" content="畅读阁" />
+    <meta name="keywords" content="免费阅读,在线阅读,免费小说,电子书,书籍,小说" />
+    <meta name="description" content="畅读阁是一个提供各种热门电子书,书籍,小说免费在线阅读的网站，我们致力于为在线阅读提供良好的阅读体验" />
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+    <link rel="alternate" hreflang="zh-Hant" href="index.html" />
+    <link rel="alternate" media="only screen and (max-width: 640px)" href="index.html" />
+    <link type="text/css" rel="stylesheet" href="/css/changdu.css" />
+    <link type="text/css" rel="stylesheet" href="/css/list.css" />
+    <link type="text/css" rel="stylesheet" href="/css/author.css" />
+    <title th:text="${author}+'作品集_和图书'">Title</title>
+</head>
+<body>
+    <div th:include="common/header :: header"></div>
+    <div class="author_box">
+        <div class="author_info">
+            <h4 th:text="${author}"></h4>
+            <p></p>
+        </div>
+    </div>
+    <div class="list" id="body">
+        <dt>全部作品<span th:text="'('+${books.size()+'本)'}"></span></dt>
+        <dd th:each="book:${books}">
+            <a th:href="'/book/' + ${book.bookId}">
+                <img th:src="${book.cover}" alt="">
+            </a>
+            <div class="state"></div>
+            <h4>
+                <a th:href="'/book/' + ${book.bookId}" th:text="${book.name}"></a><span th:text="'/ ' + ${book.category} + ' /'"></span>
+            </h4>
+            <div class="intro" th:text="${book.description}"></div>
+            <div><span class="button">加入书架</span></div>
+        </dd>
+    </div>
+</body>
+</html>

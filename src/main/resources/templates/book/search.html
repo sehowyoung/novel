@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="zh-Hans">
+<head>
+    <meta charset="utf-8" />
+    <meta name="Copyright" content="畅读阁" />
+    <meta name="keywords" content="免费阅读,在线阅读,免费小说,电子书,书籍,小说" />
+    <meta name="description" content="畅读阁是一个提供各种热门电子书,书籍,小说免费在线阅读的网站，我们致力于为在线阅读提供良好的阅读体验" />
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+    <link rel="alternate" hreflang="zh-Hant" href="index.html" />
+    <link rel="alternate" media="only screen and (max-width: 640px)" href="index.html" />
+    <link type="text/css" rel="stylesheet" href="/css/changdu.css" />
+    <link type="text/css" rel="stylesheet" href="/css/list.css" />
+    <style type="text/css">
+        .list dt {
+            border-bottom: 1px solid #e6e6e6;
+            margin-top: 40px;
+        }
+
+        #body dt span {
+            font-size: 14px;
+            /*color: #189e71;*/
+            padding: 5px 25px;
+            display: inline-block;
+            margin-bottom: -1px;
+        }
+
+        .list dd {
+            position: relative;
+        }
+    </style>
+    <title>畅读阁</title>
+</head>
+<body>
+<div th:include="common/header :: header"></div>
+<dl class="list" id="body">
+    <dt th:utext="(${keyword}!=null and ${keyword}!='')?'共搜索到'+${books.size()}+'本作品<span>(关键词：'+${keyword}+')':'请输入搜索内容'"></dt>
+    <dd th:each="book : ${books}">
+        <a th:href="'/book/' + ${book.bookId}"><img th:src="${book.cover}" alt=""></a>
+        <div class="state"></div>
+        <h4>
+            <a th:href="'/book/' + ${book.bookId}" th:text="${book.name}"></a><span th:text="'/ '+${book.author}+' /'"></span>
+        </h4>
+        <div class="intro" th:text="${book.description}"></div>
+    </dd>
+</dl>
+<div class="foot">
+    网站简介 | 商务合作 | 版权声明 | 联系我们 | 网站地图<p>Copyright&nbsp;@&nbsp;2022&nbsp;&nbsp;All Rights Reserved.</p>
+</div>
+</body>
+</html>

@@ -46,7 +46,7 @@
         <div th:class="'book_info ' + (${book.statusCode}==0?'finish':'continue')">
             <img th:alt="${book.name}" th:src="${book.cover}" />
             <h2 th:text="${book.name}">旧日学霸</h2>
-            <div>作者：<a th:href="@{/author/{name}(name=${book.author})}" th:title="${book.author} + '作品集'" th:text="${book.author}">钟不暮</a> </div>
+            <div>作者：<a th:href="'/author/' + ${book.author}" th:title="${book.author} + '作品集'" th:text="${book.author}">钟不暮</a> </div>
             <div th:text="'类型：' + ${book.category}">玄幻小说</div>
             <div th:text="'字数：' + ${book.word}"></div>
             <div class="intro" th:text="${book.description}"></div>

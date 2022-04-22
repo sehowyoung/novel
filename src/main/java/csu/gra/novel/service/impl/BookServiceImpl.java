@@ -59,4 +59,14 @@ public class BookServiceImpl implements BookService {
     public List<Book> getTopList(int num) {
         return bookMapper.getTopList(num);
     }
+
+    @Override
+    public List<Book> getBookByKeyword(String keyword) {
+        return bookMapper.getBookByKeyword(keyword);
+    }
+
+    @Override
+    public List<Book> getBooksByAuthor(String author) {
+        return bookMapper.getBooksByAuthor(author);
+    }
 }

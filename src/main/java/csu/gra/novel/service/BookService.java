@@ -3,7 +3,6 @@ package csu.gra.novel.service;
 import csu.gra.novel.domain.Book;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author howyoung
@@ -24,4 +23,8 @@ public interface BookService {
     Book getBookById(int id);
 
     List<Book> getTopList(int num);
+
+    List<Book> getBookByKeyword(String keyword);
+
+    List<Book> getBooksByAuthor(String author);
 }
