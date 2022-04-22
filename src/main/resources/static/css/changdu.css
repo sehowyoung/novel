@@ -77,7 +77,7 @@ img {
     overflow: hidden;
 }
 
-.head #title {
+.head #title a {
     font-size: 48px;
     color: #ffffff;
     margin: 14px 0 0 50px;
