@@ -50,7 +50,11 @@
             <div th:text="'类型：' + ${book.category}">玄幻小说</div>
             <div th:text="'字数：' + ${book.word}"></div>
             <div class="intro" th:text="${book.description}"></div>
-            <div class="nav"><a th:href="'/book/' + ${book.bookId} + '/' + ${book.chapters[0].id}" class="button">在线阅读</a><span class="button" id="bf">加入书架</span>
+            <div class="nav">
+                <a th:href="'/book/' + ${book.bookId} + '/' + ${book.chapters[0].id}" class="button">在线阅读</a>
+<!--                <span class="button" id="bf">加入书架</span>-->
+                <a th:if="${session.user}!= null and ${!session.isEmpty()}" th:href="'/user/' + ${book.bookId} + '?type=/book/' + ${book.bookId}" class="button">加入书架</a>
+                <a th:if="${session.user}== null or ${session.isEmpty()}" href="/user/login" class="button">加入书架</a>
             </div>
         </div>
         <div class="dir_title"><span>小说目录</span></div>

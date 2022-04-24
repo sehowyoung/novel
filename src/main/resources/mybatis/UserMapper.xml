@@ -2,12 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="csu.gra.novel.mapper.UserMapper">
+<!--    <cache eviction="LRU" flushInterval="100000" readOnly="true" size="1024"/>-->
     <insert id="insertUser" parameterType="User">
         INSERT INTO user (username, password, email)
         values (#{username}, #{password}, ${email})
     </insert>
+    <delete id="deleteFavorite">
+        DELETE FROM favorite where userid = #{userId} AND bookid = #{bookId}
+    </delete>
     <select id="findUserByUsernameAndPassword" parameterType="User" resultType="User">
         SELECT userid as userId, username, password, email, phone
         FROM user WHERE username = #{username} AND password = #{password}
     </select>
+    <select id="findFavorite" resultType="java.lang.Integer">
+        SELECT id from favorite where userid= #{userId} and bookid= #{bookId}
+    </select>
+    <select id="getFavoriteBooks" resultType="csu.gra.novel.domain.Book">
+        SELECT id as bookId, name, description, author, category, updated, cover, hot, status as statusCode, word
+        FROM book
+        WHERE book.id in (SELECT bookid FROM favorite WHERE userid = #{userId})
+    </select>
+    <insert id="insertFavorite">
+        INSERT INTO favorite(userid, bookid)
+        VALUES (#{userId}, #{bookId})
+    </insert>
 </mapper>

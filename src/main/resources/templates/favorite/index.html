@@ -1,18 +1,16 @@
 <!DOCTYPE HTML>
-<html lang="zh-Hans">
+<html lang="zh-Hans" xmlns:th="https://www.thymeleaf.org">
 
 <head>
   <meta charset="utf-8" />
-  <meta name="Copyright" content="和图书" />
+  <meta name="Copyright" content="畅读阁" />
   <meta name="keywords" content="免费阅读,在线阅读,免费小说,电子书,书籍,小说" />
-  <meta name="description" content="和图书是一个提供各种热门电子书,书籍,小说免费在线阅读的网站，我们致力于为在线阅读提供良好的阅读体验" />
-  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-  <link rel="alternate" hreflang="zh-Hant" href="https://m.hetubook.com/favorite/index.php" />
-  <link rel="alternate" media="only screen and (max-width: 640px)" href="https://m.hetushu.com/favorite/index.php" />
-  <link type="text/css" rel="stylesheet" href="/command/hetu.css" />
-  <script type="text/javascript" src="/command/language.js"></script>
-  <script type="text/javascript" src="/command/hetu.js"></script>
-  <link type="text/css" rel="stylesheet" href="/command/list.css" />
+  <meta name="description" content="畅读阁是一个提供各种热门电子书,书籍,小说免费在线阅读的网站，我们致力于为在线阅读提供良好的阅读体验" />
+  <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+  <link rel="alternate" hreflang="zh-Hant" href="index.html" />
+  <link rel="alternate" media="only screen and (max-width: 640px)" href="index.html" />
+  <link type="text/css" rel="stylesheet" href="/css/changdu.css" />
+  <link type="text/css" rel="stylesheet" href="/css/list.css" />
   <style>
     .list {
       margin-top: 40px;
@@ -55,85 +53,28 @@
       border: 0;
     }
   </style>
-  <script type="text/javascript">
-    eval(function (p, a, c, k, e, r) {
-      e = function (c) {
-        return c.toString(a)
-      };
-      if (!''.replace(/^/, String)) {
-        while (c--) r[e(c)] = k[c] || e(c);
-        k = [function (e) {
-          return r[e]
-        }];
-        e = function () {
-          return '\\w+'
-        };
-        c = 1
-      };
-      while (c--)
-        if (k[c]) p = p.replace(new RegExp('\\b' + e(c) + '\\b', 'g'), k[c]);
-      return p
-    }('5 6(a,b){7 c=8.h(\'i\');c.j=\'k\';c.e(8.l(b));7 d=m(a);2(d){d.1.n(c,d)}o{a.1.e(c)}};5 p(t,a,b){2(3.q(a,b)){t.1.1.1.r(t.1.1);$(\'4\').f=$(\'4\').f.s(/[0-9]+/,3.g);2(3.g==0){6($(\'4\'),u)}}};',
-            31, 31,
-            '|parentNode|if|bookfavorite|fh|function|createNoItem|var|document||||||appendChild|innerHTML|count|createElement|dd|className|no|createTextNode|nextSibling|insertBefore|else|delBF|del|removeChild|replace||LANG_NO_FAVORITE'
-                    .split('|'), 0, {}));
-  </script>
-  <title>书架_和图书</title>
+  <title>书架_畅读阁</title>
 
 <body>
-<div class="head">
-  <span id="title">和图书</span>
-  <form id="form1" method="get" action="/book/search.php" target="_blank">
-    <div id="search_box">
-      <input type="text" id="keyword" name="keyword" placeholder="请输入搜索内容..." /><button id="search_b"
-                                                                                        type="submit">搜索</button>
-    </div>
-  </form>
-  <div class="edition">
-    简体版 | <a href="https://www.hetubook.com">繁體版</a> </div>
-</div>
-<div class="menu">
-  <a href="/index.php">首页</a>
-  <a href="/book/index.php">小说</a>
-  <a href="/top/index.php">榜单</a>
-  <a href="/favorite/index.php">书架</a>
-  <a id="m" href="https://m.hetushu.com/favorite/index.php">手机阅读</a>
-</div>
+<div th:include="common/header :: header"></div>
 <dl class="list">
-  <dt id="bh">阅读记录<span>(0本)</span></dt>
-  <dd class="loading"></dd>
-  <dt id="fh">收藏书籍<span>(0本)</span></dt>
-  <dd class="no">暂无收藏书籍！</dd>
+  <dt id="fh">收藏书籍<span th:text="'('+${books.size()} + '本)'"></span></dt>
+  <dd th:each="book : ${books}" th:if="${books.size()!=0}">
+    <a th:href="'/book/'+${book.bookId}"><img th:src="${book.cover}" alt=""></a>
+    <h4 style=""><a th:href="'/book/'+${book.bookId}" th:text="${book.name}"></a><span th:text="'/ ' + ${book.author} + ' /'"></span></h4>
+    <div class="intro" th:text="${book.description}"></div>
+    <div>
+      <a th:href="'/book/' + ${book.bookId}" class="button">阅读</a>
+      <a th:href="'/user/del/' + ${book.bookId}" class="button">删除</a>
+    </div>
+  </dd>
+  <dd class="no" th:if="${books.size()}==0">暂无收藏书籍！</dd>
 </dl>
-<script type="text/javascript">
-  eval(function (p, a, c, k, e, r) {
-    e = function (c) {
-      return (c < a ? '' : e(parseInt(c / a))) + ((c = c % a) > 35 ? String.fromCharCode(c + 29) :
-              c.toString(36))
-    };
-    if (!''.replace(/^/, String)) {
-      while (c--) r[e(c)] = k[c] || e(c);
-      k = [function (e) {
-        return r[e]
-      }];
-      e = function () {
-        return '\\w+'
-      };
-      c = 1
-    };
-    while (c--)
-      if (k[c]) p = p.replace(new RegExp('\\b' + e(c) + '\\b', 'g'), k[c]);
-    return p
-  }('D E(b,c,d,e,f){8 g=6.p(\'P\');8 a=6.p(\'a\');8 h=6.p(\'a\');8 i=6.p(\'a\');8 j=6.p(\'a\');8 k=6.p(\'Q\');8 l=6.p(\'R\');8 m=6.p(\'F\');8 n=6.p(\'F\');8 o=6.p(\'S\');k.T=U+\'/\'+b+\'/V.W/X\'+c+\'.Y\';a.v=h.v=\'/\'+b+\'/\'+c+\'/Z.G\';i.v=j.v=\'/\'+b+\'/\'+c+\'/\'+e+\'.G\';o.w=j.w=\'10\';a.7(k);h.7(6.t(d));l.7(h);m.7(6.t(11));i.7(6.t(f));m.7(i);j.7(6.t(12));o.7(6.t(13));o.14=D(){x(q.15(b,c)){g.z.H(g);$(\'s\').A=$(\'s\').A.I(/[0-9]+/,q.y);J.K(16);x(q.y==0){17($(\'s\'),L)}}B{J.K(18)}};n.7(j);n.7(o);g.w=\'19\';g.7(a);g.7(l);g.7(m);g.7(n);$(\'s\').z.1a(g,M($(\'s\')))};q.N();8 u=M($(\'s\'));x(q.y==0){u.w=\'1b\';u.7(6.t(L))}B{$(\'s\').A=1c.I(/0/,q.y);8 C=1d 1e(\'{"1f":"(r[0-9]?)","1g":"([0-9]+)","1h":"([^"]+)","1i":"([0-9]+)","1j":"([^"]+)"}[,]?\',\'g\');1k{8 r=C.1l(q.O);x(r){E(r[1],r[2],r[3],r[4],r[5])}B{1m}}1n(C.1o!=q.O.1p);u.z.H(u)};1q.N();',
-          62, 89,
-          '||||||document|appendChild|var|||||||||||||||||createElement|bookhistory|book|bh|createTextNode|obj|href|className|if|count|parentNode|innerHTML|else|pattern|function|createBH|div|html|removeChild|replace|message|flash|LANG_NO_HISTORY|nextSibling|init|value|dd|img|h4|span|src|IMGBASE|cover|pic|cover_|jpg|index|button|LANG_READ_POSITION|LANG_CONTINUE_READ|LANG_DEL|onclick|del|LANG_DEL_SUCCESS|createNoItem|LANG_DEL_FAIL|bookh|insertBefore|no|LANG_HISTORY_TITLE|new|RegExp|path|bid|bname|sid|sname|do|exec|break|while|lastIndex|length|scrollTop'
-                  .split('|'), 0, {}));
-</script>
 <div id="hetu"></div>
 <div class="foot">
   网站简介 | 商务合作 | 版权声明 | 联系我们 | 网站地图<p>Copyright&nbsp;@&nbsp;2022&nbsp;&nbsp;All Rights Reserved.</p>
 </div>
-<script type="text/javascript" src="/command/init.js"></script>
+<!--<script type="text/javascript" src="/command/init.js"></script>-->
 </body>
 
 </html>

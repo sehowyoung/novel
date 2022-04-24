@@ -3,6 +3,9 @@ package csu.gra.novel;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * @author howyoung
+ */
 @SpringBootApplication
 public class NovelApplication {
 

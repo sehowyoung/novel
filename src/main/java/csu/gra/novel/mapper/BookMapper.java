@@ -28,4 +28,8 @@ public interface BookMapper {
     List<Book> getBookByKeyword(String keyword);
 
     List<Book> getBooksByAuthor(String author);
+
+    List<Book> getBooksByUser(int userId);
+
+    Chapter getChapterById(int id);
 }

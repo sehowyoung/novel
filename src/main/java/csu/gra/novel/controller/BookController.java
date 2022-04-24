@@ -81,14 +81,17 @@ public class BookController {
             List<Chapter> list = book.getChapters();
             int index = book.getBookByChapterId(chapterId);
             Chapter chapter = list.get(index);
-            chapter.setCons(chapter.getContent());
             Chapter next = new Chapter();
             Chapter pre = new Chapter();
+            chapter = bookService.getChapterById(chapter.getId());
+            chapter.setCons(chapter.getContent());
             if (index > 0){
                 pre = list.get(index - 1);
+                pre = bookService.getChapterById(pre.getId());
             }
             if (index != list.size() - 1){
                 next = list.get(index + 1);
+                next = bookService.getChapterById(next.getId());
             }
             model.addAttribute("book", book);
             model.addAttribute("chapter", chapter);

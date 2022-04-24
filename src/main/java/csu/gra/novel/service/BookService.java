@@ -1,6 +1,7 @@
 package csu.gra.novel.service;
 
 import csu.gra.novel.domain.Book;
+import csu.gra.novel.domain.Chapter;
 
 import java.util.List;
 
@@ -27,4 +28,8 @@ public interface BookService {
     List<Book> getBookByKeyword(String keyword);
 
     List<Book> getBooksByAuthor(String author);
+
+    List<Book> getBooksByUser(int userId);
+
+    Chapter getChapterById(int id);
 }

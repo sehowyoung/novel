@@ -63,6 +63,11 @@
         <span th:class="list-num" th:text="${iterStat.index}"></span>
         <h4><a th:href="'/book/' + ${book.bookId}" th:text="${book.name}"></a><span th:text="'/ ' + ${book.author} + ' /'"></span></h4>
         <div class="intro" th:text="${book.description}"></div>
+        <div>
+            <a th:href="'/book/' + ${book.bookId} + '/' + ${book.chapters[0].id}" class="button">免费阅读</a>
+            <a th:if="${session.user}!= null and ${!session.isEmpty()}" th:href="'/user/' + ${book.bookId} + '?type=/top/index'" class="button">加入书架</a>
+            <a th:if="${session.user}== null or ${session.isEmpty()}" href="/user/login" class="button">加入书架</a>
+        </div>
     </dd>
 </dl>
 <div id="hetu"></div>

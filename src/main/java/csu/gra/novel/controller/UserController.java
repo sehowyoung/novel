@@ -1,5 +1,6 @@
 package csu.gra.novel.controller;
 
+import csu.gra.novel.domain.Book;
 import csu.gra.novel.domain.User;
 import csu.gra.novel.service.UserService;
 import org.apache.ibatis.annotations.Param;
@@ -7,13 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.DigestUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -26,14 +25,16 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/login")
-    public String login(@Param("username") String username, @Param("password") String password, HttpServletRequest request, Model model){
+    public String login(@RequestParam(value = "path", required = false, defaultValue = "/index") String path,
+                        @Param("username") String username,
+                        @Param("password") String password, HttpServletRequest request, Model model){
         if (username != null && !("").equals(username) && password != null && !("").equals(password)){
             password = DigestUtils.md5DigestAsHex(password.getBytes(StandardCharsets.UTF_8));
             User user = userService.findUserByUsernameAndPassword(username, password);
             if (user != null){
                 model.addAttribute("msg", "登陆成功");
                 request.getSession().setAttribute("user", user);
-                return "redirect:/index";
+                return "redirect:" + path;
             }
         }
         model.addAttribute("msg", "请检查用户名和密码是否正确");
@@ -41,7 +42,8 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String login(){
+    public String login(@RequestParam(value = "path", required = false, defaultValue = "/index") String path, Model model){
+        model.addAttribute("path", path);
         return "/user/login";
     }
 
@@ -50,7 +52,7 @@ public class UserController {
         return "/user/register";
     }
 
-    @GetMapping("logout")
+    @GetMapping("/logout")
     public String logout(HttpServletRequest request){
         request.getSession().removeAttribute("user");
         return "redirect:/index";
@@ -71,5 +73,34 @@ public class UserController {
 //            request.setAttribute("user", user);
 //        }
         return "redirect:/index";
+    }
+
+    @RequestMapping("/{bookId}")
+    public String addFavorite(@RequestParam(value = "type", required = false, defaultValue = "/top/index")String type,
+                              @PathVariable int bookId, HttpServletRequest request, Model model){
+        User user = (User)request.getSession().getAttribute("user");
+        userService.insertFavorite(user.getUserId(), bookId);
+        return "redirect:" + type;
+    }
+
+    @RequestMapping("/favorite/index")
+    public String bookshelf(HttpServletRequest request, Model model){
+        User user = (User) request.getSession().getAttribute("user");
+        if (user != null){
+            List<Book> books = userService.getFavoriteBooks(user.getUserId());
+            model.addAttribute("books", books);
+            return "/favorite/index";
+        }
+        return "/user/login";
+    }
+
+    @RequestMapping("/del/{bookId}")
+    public String delFav(HttpServletRequest request, @PathVariable int bookId){
+        User user = (User) request.getSession().getAttribute("user");
+        if (user != null){
+            userService.delFavorite(user.getUserId(), bookId);
+            return "redirect:/user/favorite/index";
+        }
+        return "/user/login";
     }
 }

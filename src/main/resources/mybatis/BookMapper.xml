@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="csu.gra.novel.mapper.BookMapper">
+<!--    <cache eviction="LRU" flushInterval="100000" readOnly="true" size="1024"/>-->
     <update id="updateBook">
         UPDATE book
         SET name=#{name}, description=#{description}, author=#{author}, category=#{category}, updated=#{updated}, hot=#{hot}, status=#{statusCode}, word=#{word}, cover = #{cover}
@@ -49,7 +50,7 @@
         FROM book WHERE id = #{id}
     </select>
     <select id="getChaptersByBookId" resultType="csu.gra.novel.domain.Chapter">
-        SELECT id, bookid AS bookId, name, content FROM chapter WHERE bookid = #{bookId}
+        SELECT id, bookid AS bookId, name FROM chapter WHERE bookid = #{bookId}
     </select>
     <select id="getTopList" resultType="csu.gra.novel.domain.Book">
         SELECT book.id as bookId, name, description, author, category, updated, cover, hot, status as statusCode, word
@@ -68,5 +69,13 @@
         SELECT id as bookId, name, description, author, category, updated, cover, hot, status as statusCode, word
         FROM book
         WHERE author = ${author}
+    </select>
+    <select id="getBooksByUser" resultType="csu.gra.novel.domain.Book">
+        SELECT id as bookId, name, description, author, category, updated, cover, hot, status as statusCode, word
+        FROM book
+        WHERE book.bookId = (SELECT bookId FROM favorite WHERE userid = #{userId})
+    </select>
+    <select id="getChapterById" resultType="csu.gra.novel.domain.Chapter">
+        SELECT id, bookid AS bookId, name ,content FROM chapter WHERE id = #{id}
     </select>
 </mapper>
