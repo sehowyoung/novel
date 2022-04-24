@@ -122,7 +122,16 @@ img {
     font-size: 16px;
 }
 
-.menu a {
+.menu div{
+    display: inline-block;
+}
+
+.menu .right {
+    margin-right: 30px;
+    float: right;
+}
+
+.menu div a {
     color: #fff;
     padding: 0 15px;
     display: inline-block;

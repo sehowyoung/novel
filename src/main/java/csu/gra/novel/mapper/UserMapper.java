@@ -12,7 +12,7 @@ public interface UserMapper {
      * @param user 有用户名和密码
      * @return 用户所有信息
      */
-    User findUserByUsernameAndPassword(User user);
+    User findUserByUsernameAndPassword(String username, String password);
 
-    Boolean insertUser(User user);
+    void insertUser(User user);
 }

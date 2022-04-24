@@ -18,8 +18,9 @@ public class User {
     private String phone;
     private ArrayList<Book> favorites;
 
-    public User(String username, String password) {
+    public User(String username, String password, String email) {
         this.username = username;
         this.password = password;
+        this.email = email;
     }
 }

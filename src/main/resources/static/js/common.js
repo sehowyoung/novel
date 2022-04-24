@@ -54,14 +54,6 @@ if (document.cookie.indexOf('jieqiUserInfo') >= 0) {
     }
 }
 
-// 搜索框
-// function SearchBox() {
-//     document.writeln("<form method=\"get\" target='_blank' action=\"/modules/article/search.php\">");
-//     document.writeln("                <input  type=\"text\" name=\"searchkey\" class=\"search\" placeholder=\"提示：宁可少字也别错字\" autocomplete=\"off\"/>");
-//     document.writeln("                <button type=\"submit\">搜索小说</button>");
-//     document.writeln("            </form>");
-// }
-
 //滑动门
 function getNames(obj, name, tij) {
     var p = document.getElementById(obj);

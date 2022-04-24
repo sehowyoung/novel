@@ -3,10 +3,11 @@
 
 <mapper namespace="csu.gra.novel.mapper.UserMapper">
     <insert id="insertUser" parameterType="User">
-        INSERT INTO user (username, password)
-        values (#{username}, #{password})
+        INSERT INTO user (username, password, email)
+        values (#{username}, #{password}, ${email})
     </insert>
     <select id="findUserByUsernameAndPassword" parameterType="User" resultType="User">
-        SELECT * FROM user WHERE username = #{username} AND password = #{password}
+        SELECT userid as userId, username, password, email, phone
+        FROM user WHERE username = #{username} AND password = #{password}
     </select>
 </mapper>

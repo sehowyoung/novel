@@ -1,4 +1,4 @@
-package csu.gra.novel.service.impl;
+package csu.gra.novel.service;
 
 import csu.gra.novel.domain.User;
 
@@ -6,7 +6,7 @@ import csu.gra.novel.domain.User;
  * @author howyoung
  */
 public interface UserService {
-    Boolean insertUser(User user);
+    User findUserByUsernameAndPassword(String username, String password);
 
-    User findUserByUsernameAndPassword(User user);
+    User register(User user);
 }
